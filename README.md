@@ -1,4 +1,8 @@
-<h1 align="center">灵犀AI · WPS Office 多宿主 AI 助手</h1>
+<h1 align="center">文小舟 · WPS Office 多宿主 AI 助手</h1>
+
+<p align="center">
+  <b>品牌更名提醒：为避免与 WPS 官方插件名称混淆，本插件已由“灵犀AI”更名为“文小舟”。</b>
+</p>
 
 <p align="center">
   一个 TaskPane 兼容 <b>WPS 文字 / 表格 / 演示 / PDF</b> 四端的 AI 助手，挂多家 AI（Codex / OpenAI / Anthropic / Gemini / Azure / OpenAI 兼容），AI 通过工具调用<b>直接读写文档</b>。
@@ -66,14 +70,14 @@ WPS 宿主（文字/表格/演示/PDF）
 
 ### 2. 安装
 
-- **Windows**：先临时关掉杀软实时防护 → 双击 setup.exe → 完全退出 WPS → 重开 WPS，ribbon 出现「灵犀AI」标签即成功
+- **Windows**：先临时关掉杀软实时防护 → 双击 setup.exe → 完全退出 WPS → 重开 WPS，ribbon 出现「文小舟」标签即成功
 - **macOS**：**右键 .pkg → 打开**（Gatekeeper 拦未签名包，双击会报错）→ 输系统密码 → 完全退出 WPS → 重开 WPS
 
 详细步骤（卸载 / 升级 / 故障排查 / 安装器构建）见 [INSTALL.md](INSTALL.md)。
 
 ### 3. 配置 AI 模型
 
-1. ribbon 点「打开灵犀AI」→ TaskPane 右侧弹出 → ⚙ 设置（独立弹窗）
+1. ribbon 点「打开文小舟」→ TaskPane 右侧弹出 → ⚙ 设置（独立弹窗）
 2. 「聊天模型」面板 → **+ 新增供应商** → 15 条预设里选一家（baseURL 已预填）
 3. 填 API Key → ⚡ 测试 → 关弹窗 → header 下拉挑模型开聊
 
@@ -252,4 +256,4 @@ registry.registerTool({
 
 本项目基于 **[MIT License](LICENSE)** 开源 —— 可自由使用、修改、分发、商用，保留版权与许可声明即可。
 
-> 品牌名称「灵犀AI」、公众号二维码及截图等资产不在 MIT 授权范围内，仅用于标识本项目。
+> 品牌名称「文小舟」、公众号二维码及截图等资产不在 MIT 授权范围内，仅用于标识本项目。

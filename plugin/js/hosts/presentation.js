@@ -65,13 +65,18 @@
     if (!slide) return "";
     const shapes = slide.Shapes;
     const count = shapes?.Count || 0;
-    const lines = [];
+    const items = [];
     for (let i = 1; i <= count; i += 1) {
       const shape = shapes.Item(i);
       const text = readShapeText(shape).trim();
-      if (text) lines.push(text);
+      if (text) {
+        const geometry = {};
+        try { geometry.top = shape.Top; } catch (e) {}
+        try { geometry.left = shape.Left; } catch (e) {}
+        items.push({ index: i, text, geometry });
+      }
     }
-    const body = lines.join("\n");
+    const body = (global.WpsAiPresentationOrder?.sort(items) || items).map((item) => item.text).join("\n");
     if (!withHeader) return body;
     const idx = slide.SlideIndex || slide.Index || "";
     return `# Slide ${idx}\n${body}`;

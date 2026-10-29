@@ -51,19 +51,19 @@ endlocal & exit /b %RC%
 echo.
 echo ===================================================
 echo  post-install 启动 %DATE% %TIME%
-echo  INSTALL_DIR=%INSTALL_DIR%
-echo  TARGET=%TARGET%
-echo  TARGET_USER=%TARGET_USER%
-echo  TARGET_SID=%TARGET_SID%
-echo  TARGET_APPDATA=%TARGET_APPDATA%
-echo  TARGET_SOURCE=%TARGET_SOURCE%
+echo  INSTALL_DIR="%INSTALL_DIR%"
+echo  TARGET="%TARGET%"
+echo  TARGET_USER="%TARGET_USER%"
+echo  TARGET_SID="%TARGET_SID%"
+echo  TARGET_APPDATA="%TARGET_APPDATA%"
+echo  TARGET_SOURCE="%TARGET_SOURCE%"
 echo  PROCESS_USER=%USERDOMAIN%\%USERNAME%
 echo ===================================================
 
 REM ---- 1. 挑 Node ----
 set "NODE_EXE=%INSTALL_DIR%\plugin\runtime\node-win-x64\node.exe"
 if not exist "%NODE_EXE%" (
-  echo [WARN] 内置 Node 不在 %NODE_EXE%,退到系统 PATH
+  echo [WARN] 内置 Node 不在 "%NODE_EXE%",退到系统 PATH
   where node >nul 2>&1
   if errorlevel 1 (
     echo [X] 内置 Node 没找到,系统也没装 Node。
@@ -72,7 +72,7 @@ if not exist "%NODE_EXE%" (
   )
   set "NODE_EXE=node"
 )
-echo [post-install] 使用 Node: %NODE_EXE%
+echo [post-install] 使用 Node: "%NODE_EXE%"
 "%NODE_EXE%" --version
 
 REM ---- 2. 停老服务 ----
@@ -85,7 +85,7 @@ echo [post-install] 清理旧安装目录冗余文件...
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File "%INSTALL_DIR%\plugin\tools\cleanup-install-dir.ps1" -PluginDir "%INSTALL_DIR%\plugin"
 
 REM ---- 3. 生成三份宿主变体 ----
-echo [post-install] 生成三份宿主变体到 %TARGET%...
+echo [post-install] 生成三份宿主变体到 "%TARGET%"...
 pushd "%INSTALL_DIR%\plugin"
 "%NODE_EXE%" tools\build-variants.js --out "%TARGET%"
 if errorlevel 1 (
@@ -98,6 +98,7 @@ popd
 REM ---- 4. 拷服务脚本 ----
 if not exist "%TARGET%\tools" mkdir "%TARGET%\tools"
 copy /Y "%INSTALL_DIR%\plugin\tools\serve-permanent.js" "%TARGET%\tools\serve-permanent.js"
+copy /Y "%INSTALL_DIR%\plugin\tools\ribbon-position.js" "%TARGET%\tools\ribbon-position.js"
 copy /Y "%INSTALL_DIR%\plugin\tools\service-runner.js"   "%TARGET%\tools\service-runner.js"
 copy /Y "%INSTALL_DIR%\plugin\tools\service-watchdog.ps1" "%TARGET%\tools\service-watchdog.ps1"
 copy /Y "%INSTALL_DIR%\plugin\tools\run-hidden.vbs" "%TARGET%\tools\run-hidden.vbs"
@@ -148,7 +149,7 @@ if exist "%PUBLISH%" (
   echo ^</jsplugins^>
 ) > "%PUBLISH%"
 if exist "%OTHER_ENTRIES%" del /F /Q "%OTHER_ENTRIES%" >nul 2>&1
-echo [post-install] publish.xml 已写: %PUBLISH%
+echo [post-install] publish.xml 已写: "%PUBLISH%"
 <nul set /p "=%PUBLISH%" > "%INSTALL_DIR%\lingxi-install-target.txt"
 
 REM ---- 5c. 如果 proxy 端口变了,把 TARGET 下 JS 里硬编码的 :3890 改成新端口 ----

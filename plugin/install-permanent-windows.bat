@@ -1,9 +1,9 @@
 @echo off
 chcp 65001 >nul 2>&1
-title 灵犀AI 永久安装（Windows）
+title 文小舟 永久安装（Windows）
 
 echo ============================================
-echo   灵犀AI WPS 插件 - Windows 永久安装
+echo   文小舟 WPS 插件 - Windows 永久安装
 echo ============================================
 echo   会一次性给三个 WPS 应用（文字/表格/演示）注册插件，
 echo   并把后台服务加到登录时自动启动。
@@ -106,7 +106,7 @@ echo [OK] %RUN_VBS%
 REM 4b. 带窗口的调试启动脚本
 (
   echo @echo off
-  echo title 灵犀AI 后台服务（调试模式）
+  echo title 文小舟 后台服务（调试模式）
   echo node "%TARGET%\tools\serve-permanent.js" --root "%TARGET%"
 ) > "%DEBUG_BAT%"
 
@@ -143,7 +143,7 @@ echo   后台服务: http://127.0.0.1:3889 / :3890
 echo   日志输出: %TARGET%\server.log
 echo.
 echo   下一步:
-echo     1. 重新打开 WPS 文字 / 表格 / 演示，顶部应出现「灵犀AI」
+echo     1. 重新打开 WPS 文字 / 表格 / 演示，顶部应出现「文小舟」
 echo     2. 不需要保留任何终端窗口，服务后台跑
 echo.
 echo   排错:

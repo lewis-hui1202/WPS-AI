@@ -113,7 +113,7 @@ try {
     -Trigger $trigger `
     -Settings $settings `
     -Principal $principal `
-    -Description 'Lingxi AI background service (ports 3889 / 3890)' `
+    -Description 'Wenxiaozhou background service (ports 3889 / 3890)' `
     -Force | Out-Null
 } catch {
   Write-Output "[X] Register-ScheduledTask 失败"

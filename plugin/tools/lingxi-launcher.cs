@@ -1,4 +1,4 @@
-// 灵犀AI 后台服务的零窗口启动器
+// 文小舟 后台服务的零窗口启动器
 //
 // 为什么要这个东西:
 //   计划任务 logon trigger 启 powershell.exe / cmd.exe 都会创建 console

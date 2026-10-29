@@ -1,4 +1,4 @@
-// 灵犀AI 插件热更新
+// 文小舟 插件热更新
 //
 // 流程：
 //   1. checkForUpdate() —— 走 proxy 拉 manifest（避开 OSS CORS）+ 设备 SN

@@ -103,7 +103,7 @@
         const pos = locateQuote(chunks[ci], issue?.quote);
         if (!pos) continue;
         const label = TYPE_LABELS[issue?.type] || "校对";
-        const note = `【灵犀AI 校对 · ${label}】${String(issue?.reason || "").trim()}${issue?.suggestion ? `\n建议：${String(issue.suggestion).trim()}` : ""}`;
+        const note = `【文小舟 校对 · ${label}】${String(issue?.reason || "").trim()}${issue?.suggestion ? `\n建议：${String(issue.suggestion).trim()}` : ""}`;
         try {
           await W.addCommentAtRange(pos.start, pos.end, note);
           located += 1;

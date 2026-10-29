@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI macOS 打包脚本: 产出 dist/lingxi-ai-<version>-mac.dmg
+# 文小舟 macOS 打包脚本: 产出 dist/lingxi-ai-<version>-mac.dmg
 #
 # 流程:
 #   1. 把 plugin/ 源码 + Mac x64/arm64 内置 Node 运行时收集到 staging/
@@ -49,7 +49,7 @@ WORK_DIR="$SCRIPT_DIR/build"
 PKG_ID="com.lingxi-ai.installer"
 # pkg payload 有两个目标,staging 直接按真实路径布局,pkgbuild --install-location 用 /
 LIB_DIR_REL="Library/Application Support/LingxiAI"
-APP_NAME="灵犀AI 卸载.app"
+APP_NAME="文小舟 卸载.app"
 
 # 从 plugin/package.json 拿 version
 if [ -z "$VERSION" ]; then
@@ -57,7 +57,7 @@ if [ -z "$VERSION" ]; then
 fi
 
 echo "============================================="
-echo "  灵犀AI macOS Installer Build"
+echo "  文小舟 macOS Installer Build"
 echo "============================================="
 echo "  Version:          $VERSION"
 echo "  Sign ID:          ${SIGN_ID:-<unsigned>}"
@@ -173,19 +173,19 @@ DMG_STAGING="$WORK_DIR/dmg"
 rm -rf "$DMG_STAGING"
 mkdir -p "$DMG_STAGING"
 
-cp "$PRODUCT_PKG" "$DMG_STAGING/灵犀AI 安装器.pkg"
+cp "$PRODUCT_PKG" "$DMG_STAGING/文小舟 安装器.pkg"
 
 # 加一个 README 说明(用户打开 dmg 看到的)
 cat > "$DMG_STAGING/请先阅读.txt" <<EOF
-灵犀AI WPS 插件 v$VERSION
+文小舟 WPS 插件 v$VERSION
 
 安装步骤:
-  1. 双击「灵犀AI 安装器.pkg」,按向导一路下一步
+  1. 双击「文小舟 安装器.pkg」,按向导一路下一步
   2. 完全退出 WPS(菜单 → 退出 WPS)
-  3. 重新打开 WPS,顶部出现「灵犀AI」标签页
+  3. 重新打开 WPS,顶部出现「文小舟」标签页
 
 卸载(一键):
-  Spotlight 搜「灵犀AI 卸载」,或在「应用程序」里双击「灵犀AI 卸载.app」
+  Spotlight 搜「文小舟 卸载」,或在「应用程序」里双击「文小舟 卸载.app」
 
 文档:
   https://github.com/lewis-hui1202/WPS-AI
@@ -199,7 +199,7 @@ EOF
 rm -f "$DMG_PATH"
 
 hdiutil create \
-  -volname "灵犀AI $VERSION" \
+  -volname "文小舟 $VERSION" \
   -srcfolder "$DMG_STAGING" \
   -ov \
   -format UDZO \

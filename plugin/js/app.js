@@ -1,5 +1,5 @@
 // ============================================================================
-// app.js —— WPS 灵犀 AI 主脚本
+// app.js —— 文小舟 WPS 主脚本
 // 大文件 (~15k 行)，按 // ===== 分节：
 //   1. Boot / mode 检测 / IPC 常量        (top)
 //   2. 预览日志 / 消息提示 / 文档锁定
@@ -283,7 +283,7 @@
       // 整套 PPT 生成进度条
       "fullDeckProgress", "fullDeckProgressCount", "fullDeckProgressBarFill", "fullDeckProgressLabel",
       "settingsView", "aiView",
-      "providerSelect", "operationModeSelect", "maxToolIterationsInput", "uiLanguageSelect", "aiFollowHighlightInput",
+      "providerSelect", "operationModeSelect", "maxToolIterationsInput", "uiLanguageSelect", "ribbonPositionSelect", "aiFollowHighlightInput",
       "enableHostWps", "enableHostEt", "enableHostWpp", "enableHostPdf",
       "systemPromptInput", "systemPromptResetBtn", "imageSizeOverrideInput", "showToolCallLogsInput", "splitLayersOnInsertInput",
       "signInBtn", "exchangeCodeBtn", "authCodeInput", "signOutBtn", "tokenInfo",
@@ -2037,8 +2037,12 @@
   // 而推荐操作按钮的点击守卫却检查 disabled（恒 false），导致本轮进行中可并发启动第二轮
   // runChatTurn，引发文档锁提前解除、controller 清错、停止按钮失效、定时器泄漏等连锁故障。
   let chatBusy = false;
+  let readOnlyChatTurn = false;
 
-  function setChatBusy(isBusy) {
+  function setChatBusy(isBusy, { readOnly = false } = {}) {
+    const wasBusy = chatBusy;
+    if (isBusy) readOnlyChatTurn = !!readOnly;
+    const skipDocumentLock = readOnlyChatTurn;
     chatBusy = !!isBusy;
     // Send 与 Stop 按钮互斥：忙碌时显示 Stop，否则显示 Send
     if (els.chatSendBtn) {
@@ -2052,16 +2056,19 @@
       els.suggestedActionsList.querySelectorAll("button").forEach((b) => { b.disabled = isBusy; });
     }
     // 文档锁定：AI 工作期间禁止用户编辑文档
-    if (isBusy) lockHostDocument();
-    else unlockHostDocument();
-    // 修订模式（仅 WPS 文字）：AI 工作期间打开原生修订 + 把作者临时设为「灵犀AI」，结束后还原
-    applyReviseTurn(isBusy);
+    if (!skipDocumentLock) {
+      if (isBusy) lockHostDocument();
+      else if (wasBusy) unlockHostDocument();
+    }
+    // 修订模式（仅 WPS 文字）：AI 工作期间打开原生修订 + 把作者临时设为「文小舟」，结束后还原
+    if (!skipDocumentLock && (isBusy || wasBusy)) applyReviseTurn(isBusy);
+    if (!isBusy) readOnlyChatTurn = false;
     // 一轮结束后按当前修订条数刷新「接受全部 / 全部回撤」按钮显隐（有修订才显示）
     if (!isBusy) updateReviseActions();
     // 文档型 host (wps/wpp/et) 下显示锁定 banner（内嵌进度），其他 host 用独立的 chat-progress。
     // 二选一避免两个指示器视觉重叠。
     const host = currentHostInfo?.host || "*";
-    const useBanner = isBusy && ["wps", "wpp", "et"].includes(host);
+    const useBanner = isBusy && !skipDocumentLock && ["wps", "wpp", "et"].includes(host);
     const useStandalone = isBusy && !useBanner;
     // 修订模式（Word）不锁文档，banner 文案相应改成"记为修订"，不再说"已锁定"
     if (els.docLockTitle) {
@@ -2139,7 +2146,7 @@
     els.forceUnlockBtn.classList.toggle("hidden", !(locked && !reviseMode));
   }
 
-  // 修订模式：AI 工作期间(isBusy)包一层——打开原生修订 + 作者设为「灵犀AI」；结束还原作者。
+  // 修订模式：AI 工作期间(isBusy)包一层——打开原生修订 + 作者设为「文小舟」；结束还原作者。
   // 只在 WPS 文字 + 开关打开时生效；endRevise 没 begin 过时是 no-op，收尾无脑调即可。
   function applyReviseTurn(isBusy) {
     if ((currentHostInfo?.host || "") !== "wps") return;
@@ -2147,7 +2154,7 @@
     if (!w) return;
     if (isBusy) {
       if (currentSettings?.reviseMode && typeof w.beginRevise === "function") {
-        Promise.resolve(w.beginRevise("灵犀AI")).catch(() => {});
+        Promise.resolve(w.beginRevise("文小舟")).catch(() => {});
       }
     } else if (typeof w.endRevise === "function") {
       Promise.resolve(w.endRevise()).catch(() => {});
@@ -2165,7 +2172,7 @@
       try { await w.manageRevisions(on ? "enable_track" : "disable_track"); } catch (e) {}
     }
     showMessage(
-      on ? "已开启修订模式：AI 的改动会记为 Word 修订（作者「灵犀AI」），可逐条接受或全部回撤。" : "已关闭修订模式。",
+      on ? "已开启修订模式：AI 的改动会记为 Word 修订（作者「文小舟」），可逐条接受或全部回撤。" : "已关闭修订模式。",
       "info",
       { duration: 4000 }
     );
@@ -2634,12 +2641,14 @@
   // 4. 粘贴到第二个 textarea → 点"完成授权"（exchangeCode）
   //
   // 已登录态：显示 token 有效期 + 退出按钮
-  function renderCodexCardBody(body, p) {
+  function renderCodexCardBody(body, p, models, hint) {
+    const modelField = `<label class="field"><span>默认模型</span>
+      <div class="field-with-picker"><input type="text" data-field="defaultModel" value="${escapeAttr(p.defaultModel || "")}"/>${buildModelPickerHtml(models, p.defaultModel)}</div>${hint || ""}</label>`;
     const Auth = global.WpsAiAuth;
     const tokenInfo = Auth?.getTokenInfo?.() || { authenticated: false };
     if (tokenInfo.authenticated) {
       body.innerHTML = `
-        <label class="field"><span>默认模型</span><input type="text" data-field="defaultModel" value="${escapeAttr(p.defaultModel || "")}"/></label>
+        ${modelField}
         <div class="codex-card-signedin">
           <div class="codex-status-row">
             <span class="codex-status-ok">已登录</span>
@@ -2659,7 +2668,7 @@
       return;
     }
     body.innerHTML = `
-      <label class="field"><span>默认模型</span><input type="text" data-field="defaultModel" placeholder="gpt-5.1-codex" value="${escapeAttr(p.defaultModel || "")}"/></label>
+      ${modelField}
       <div class="codex-login-steps">
         <div class="codex-step">
           <div class="codex-step-head"><span class="codex-step-no">1</span><span>生成授权链接</span></div>
@@ -2832,10 +2841,18 @@
 
   // 老接口：单 provider 给 [modelId,...]。内部转成 multi items 调 populateModelSelector
   // 兼容老的 refreshModels 调用路径
+  function clearUnavailableCodexDefault(entry, models) {
+    if (entry?.type !== "codex" || !entry.defaultModel || models.includes(entry.defaultModel)) return false;
+    entry.defaultModel = "";
+    persistSettings();
+    return true;
+  }
+
   function setModelOptions(models, selected) {
     const list = (models || []).filter(Boolean);
     const activeEntry = global.WpsAiProviderRegistry?.getActiveChatProvider?.(currentSettings) || null;
     if (activeEntry) {
+      clearUnavailableCodexDefault(activeEntry, list);
       modelsByProvider[activeEntry.id] = list;
       persistModelsCache();
     }
@@ -4179,7 +4196,7 @@
         parts.push(enabled.map((s) => `- ${s.name}${s.description ? "：" + s.description : ""}`).join("\n"));
       }
       // 让 AI 知道能把当前操作沉淀成技能、并持续优化
-      parts.push("当你完成了一套值得复用的操作，或用户要求「把刚才的操作总结成技能 / 记住这个做法 / 优化某技能」时，用 save_skill 把做法沉淀成技能（name 同名则更新=持续优化，description 写清适用场景，content 写清步骤要点）；以后遇到类似任务用 use_skill 复用。");
+      parts.push("当你完成了一套值得复用的操作，或用户要求「把刚才的操作总结成技能 / 记住这个做法 / 优化某技能」时，用 save_skill 把做法沉淀成技能（name 同名则更新=持续优化，description 写清适用场景，content 写清步骤要点）；以后遇到类似任务用 use_skill 复用。沉淀技能时只总结对话历史里已经做过的操作，不要重新执行任何工具、不要改动当前文档，这一轮只调 save_skill。");
       return parts.join("\n");
     } catch (e) { return ""; }
   }
@@ -4283,7 +4300,7 @@
 
       if (p.type === "codex") {
         // Codex 走 ChatGPT OAuth —— 直接在卡片内做完整的 4 步授权流，而不是依赖隐藏的 legacy UI
-        renderCodexCardBody(body, p);
+        renderCodexCardBody(body, p, cachedChatModels, chatModelsHint);
       } else if (p.type === "anthropic") {
         body.innerHTML = `
           <label class="field required"><span>Base URL</span><input type="text" data-field="baseUrl" placeholder="https://api.anthropic.com/v1" value="${escapeAttr(p.baseUrl || "")}"/></label>
@@ -4406,7 +4423,7 @@
       <details class="local-model-guide">
         <summary>本地模型选型建议（务必看一眼）</summary>
         <div class="local-model-guide-body">
-          <p class="muted" style="margin:6px 0 8px;">灵犀 AI 深度依赖<b>工具调用 (function calling)</b>来操作文档；图片识别 / 截图分析依赖<b>多模态 (vision)</b>。多数开源模型至少缺一项，挑错了"配上能聊天但用不了功能"。</p>
+          <p class="muted" style="margin:6px 0 8px;">文小舟深度依赖<b>工具调用 (function calling)</b>来操作文档；图片识别 / 截图分析依赖<b>多模态 (vision)</b>。多数开源模型至少缺一项，挑错了"配上能聊天但用不了功能"。</p>
 
           <p style="margin:8px 0 4px;"><b>✓ 推荐配置（工具调用稳定，部分带视觉）</b></p>
           <ul style="margin:2px 0 8px 18px; padding:0; line-height:1.6;">
@@ -5000,6 +5017,14 @@
     } catch (error) {
       currentHostInfo = { host: "unknown", label: "未知宿主" };
     }
+    // Windows WPS 12.1 may place the WebView behind its ribbon: the first
+    // ~103px of the viewport are present in layout but not actually painted.
+    // Reserve that space only for the native, docked task pane.
+    const isNativeWindowsPane = /Win/i.test(navigator.platform || "")
+      && ["wps", "et", "wpp", "pdf"].includes(currentHostInfo.host)
+      && !(new URLSearchParams(window.location.search).get("pane") === "dialog")
+      && !window.location.search.includes("mode=");
+    document.documentElement.classList.toggle("wps-docked-pane-inset", isNativeWindowsPane);
     renderQuickActions();
     renderProviderState();
     // 模板画廊只对 PPT 有意义（HTML 幻灯片模板）—— Word/Excel/PDF 下隐藏入口，避免误导。
@@ -5035,6 +5060,59 @@
     return (history || [])
       .filter((m) => m && typeof m === "object" && ALLOWED.has(m.role))
       .map((m) => ({ role: m.role, content: m.content }));
+  }
+
+  // 仅取最近的文字对话，避免旧附件或整篇文档进入技能总结请求。
+  function buildSkillSummaryHistory(history) {
+    const out = [];
+    let budget = 18000;
+    for (let i = (history || []).length - 1; i >= 0 && budget > 0 && out.length < 20; i -= 1) {
+      const msg = history[i];
+      if (!msg || !["user", "assistant"].includes(msg.role)) continue;
+      let content = typeof msg.content === "string" ? msg.content : Array.isArray(msg.content)
+        ? msg.content.filter((part) => part && part.type === "text").map((part) => part.text || "").join("\n") : "";
+      if (!content) continue;
+      const limit = Math.min(3000, budget);
+      if (content.length > limit) content = content.slice(0, limit) + "…[已截断]";
+      budget -= content.length;
+      out.unshift({ role: msg.role, content });
+    }
+    return out;
+  }
+
+  function buildSkillOperationSummary(events) {
+    const allowed = new Set(["font", "fontName", "fontSize", "size", "bold", "italic", "color", "alignment", "lineSpacing", "lineSpacingRule", "spaceBefore", "spaceAfter", "firstLineIndent", "leftIndent", "rightIndent", "style", "scope", "level"]);
+    const pending = new Map();
+    const completed = [];
+    for (const event of (events || []).slice(-100)) {
+      if (event?.type === "tool_call" && typeof event.name === "string") {
+        const params = {};
+        if (event.args && typeof event.args === "object" && !Array.isArray(event.args)) {
+          for (const [key, value] of Object.entries(event.args)) {
+            if (allowed.has(key) && (typeof value === "number" || typeof value === "boolean" || typeof value === "string" && value.length <= 100)) params[key] = value;
+          }
+        }
+        const queue = pending.get(event.name) || [];
+        queue.push({ name: event.name.slice(0, 100), params });
+        pending.set(event.name, queue);
+      } else if (event?.type === "tool_result") {
+        const call = pending.get(event.name)?.shift();
+        if (call && event.result?.ok === true) completed.push(call);
+      }
+    }
+    return JSON.stringify(completed.slice(-30));
+  }
+
+  function isFormatSkillRequest(input) {
+    const text = String(input || "");
+    return /技能|skill/i.test(text) && /格式|样式|排版/.test(text) && /创建|生成|制作|总结|提取|学习|保存|沉淀|做成|变成/i.test(text);
+  }
+
+  function skillSummaryApprover(approver, allowFormatSample = false) {
+    return async (call) => {
+      if (call?.name !== "save_skill" && !(allowFormatSample && call?.name === "wps_sample_document_formatting")) return { approved: false, reason: "本轮只允许格式采样和保存技能，不能执行其他文档操作。" };
+      return approver ? approver(call) : { approved: true };
+    };
   }
 
   // 复用：图标按钮 SVG 字符串
@@ -7025,7 +7103,7 @@
       const resp = await fetch(base + "/export-doc", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html, fileName: t("灵犀AI 排版导出") })
+        body: JSON.stringify({ html, fileName: t("文小舟 排版导出") })
       });
       const payload = await resp.json().catch(() => ({}));
       if (!resp.ok || !payload.ok) throw new Error(payload.error || `HTTP ${resp.status}`);
@@ -8794,6 +8872,7 @@
   // 展示层把 user 消息折叠成「操作盒子」（只显示按钮文字，点开看完整提示词），
   // 模型收到的内容不变（chatHistory 仍是完整 prompt）。
   async function runChatTurn(userInput, turnOpts = {}) {
+    let readOnlySkillTurn = !!turnOpts.skillSummary;
     const quickAction = (turnOpts?.quickAction && String(turnOpts.quickAction.label || "").trim())
       ? { label: String(turnOpts.quickAction.label).trim() }
       : null;
@@ -8914,7 +8993,8 @@
     try {
       const hi = await global.WpsAiDocument?.getHostInfo?.();
       const isDocHost = hi && ["wps", "wpp", "et"].includes(hi.host);
-      if (isDocHost) {
+      if (hi?.host === "wps" && isFormatSkillRequest(userInput)) readOnlySkillTurn = true;
+      if (isDocHost && !readOnlySkillTurn) {
         const dp = global.WpsAiBackup?.getCurrentDocPath?.();
         if (!dp) {
           appendTurnUserMsg();
@@ -8975,7 +9055,7 @@
       userMsgContent = userPromptText;
     }
 
-    setChatBusy(true);
+    setChatBusy(true, { readOnly: readOnlySkillTurn });
     setProgressState("thinking");
     // chat 流里展示用户消息：纯文本走原路，快捷指令折叠成操作盒子，带附件时在文本下方挂 chip 预览
     appendTurnUserMsg();
@@ -9023,6 +9103,8 @@
       // 每轮 chat 前重新探测一次 host，避免用户切换宿主后工具集错位
       currentHostInfo = await global.WpsAiDocument.getHostInfo();
       const allTools = global.WpsAiToolRegistry.listForHost(currentHostInfo.host);
+      const formatSkill = readOnlySkillTurn && !turnOpts.skillSummary && currentHostInfo.host === "wps";
+      const restrictedSkillTurn = readOnlySkillTurn;
       const model = els.modelSelect.value || global.WpsAiOpenAI.getDefaultModel();
       // 本轮锁定当前 provider 配置：中途切换模型下拉（改全局 activeChatModel）不会污染
       // 在跑的这轮——否则新模型名会被发到旧供应商，报「模型不存在」。切换只影响下一轮。
@@ -9036,7 +9118,7 @@
       //   3) 同一对话同一模型只提示一次（避免每轮刷屏）
       const activeProviderId = getActiveChatModel().providerId || "";
       const supportsTools = global.WpsAiCapabilities?.getCapabilities?.(model, activeProviderId)?.tools !== false;
-      const tools = supportsTools ? allTools : [];
+      const tools = supportsTools ? (restrictedSkillTurn ? allTools.filter((tool) => tool.name === "save_skill" || (formatSkill && tool.name === "wps_sample_document_formatting")) : allTools) : [];
       if (!supportsTools) {
         const noticeKey = `noToolNotice:${model}`;
         if (!window[noticeKey]) {
@@ -9236,12 +9318,15 @@
       const outgoingHistory = (historyComp && historyComp.upTo <= chatHistory.length)
         ? chatHistory.slice(historyComp.upTo)
         : chatHistory;
+      const skillOperations = turnOpts.skillSummary
+        ? buildSkillOperationSummary(global.WpsAiConversations?.getCurrent?.()?.events || []) : "";
       const messages = [
-        { role: "system", content: outgoingSystemPrompt },
-        ...sanitizeHistoryForModel(outgoingHistory) // 跨模型安全边界：剥工具结构/特有角色
+        { role: "system", content: restrictedSkillTurn ? [languageConstraint, "根据已有信息创建可复用技能，只能使用提供的工具。信息不足时说明不足，不要猜测。", formatSkill ? "格式技能：使用 wps_sample_document_formatting 提取格式，再调用 save_skill；默认优先选区，否则均匀抽样。说明抽样覆盖范围，不要把样本说成全文。只在用户明确要求完整扫描时使用 page 分页；没有完成时明确说明。" : "只根据本次对话历史总结，不读取或修改文档。", skillOperations ? "本次对话中已成功执行的工具及部分格式参数：" + skillOperations : ""].join("\n") : outgoingSystemPrompt },
+        ...(restrictedSkillTurn ? buildSkillSummaryHistory(chatHistory) : sanitizeHistoryForModel(outgoingHistory)) // 跨模型安全边界：剥工具结构/特有角色
       ];
 
-      const approver = await buildChatApprover();
+      const baseApprover = await buildChatApprover();
+      const approver = restrictedSkillTurn ? skillSummaryApprover(baseApprover, formatSkill) : baseApprover;
       let assistantText = "";
 
       // 本轮开始时间 + 使用的模型 —— 供元信息角标（#3）用
@@ -9522,7 +9607,7 @@
             tools,
             signal,
             thinkingLevel,
-            maxIterations: currentSettings?.maxToolIterations || 50,
+            maxIterations: restrictedSkillTurn ? Math.min(currentSettings?.maxToolIterations || 50, formatSkill ? 12 : 4) : (currentSettings?.maxToolIterations || 50),
             approveTool: approver || undefined,
             onEvent: handleStreamEvent
           });
@@ -9554,6 +9639,20 @@
       if (assistantText) {
         chatHistory.push({ role: "assistant", content: assistantText });
       }
+      // 模型明确报告全部完成却漏调最后一次 todo_patch 时，按本轮成功结果补齐显示。
+      try {
+        const conv = global.WpsAiConversations;
+        const state = conv?.getConversationTodos?.();
+        if (global.WpsAiTodoCompletion?.shouldCompleteRemaining(assistantText, state?.todos, turnEvents)) {
+          const id = conv.getCurrentId?.();
+          state.todos.forEach((todo) => {
+            if (todo.status === "pending" || todo.status === "in_progress") {
+              conv.patchConversationTodo?.(id, todo.id, { status: "completed" });
+            }
+          });
+          renderTodoPanel();
+        }
+      } catch (e) {}
     } catch (error) {
       hideThinking();
       // 用户主动中止时，AbortError 不当成错误展示（已经在 stopChat 里展示过"已停止"）
@@ -9776,6 +9875,7 @@
         entry.useProxy = tested.useProxy;
         persistSettings();
       }
+      const clearedCodexDefault = clearUnavailableCodexDefault(entry, models);
       modelsByProvider[entry.id] = models;
       persistModelsCache();
       const picked = models.includes(entry.defaultModel) ? entry.defaultModel : (models[0] || entry.defaultModel || "");
@@ -9786,7 +9886,8 @@
       // 重新渲染卡片：让默认模型 input 的 datalist 同步到最新模型列表，用户可以直接下拉选
       try { renderChatProvidersList(); } catch (e) {}
       const preview = models.slice(0, 5).join(" / ") + (models.length > 5 ? ` … (+${models.length - 5})` : "");
-      showMessage(`供应商「${label}」连通正常，返回 ${models.length} 个模型：${preview}。点「默认模型」输入框可下拉选择。`, "success", { duration: 6000 });
+      const modelNotice = clearedCodexDefault ? "原默认模型不在列表中，已清空，请重新选择。" : "请在默认模型旁的下拉框中选择。";
+      showMessage(`供应商「${label}」连通正常，返回 ${models.length} 个模型：${preview}。${modelNotice}`, "success", { duration: 6000 });
     } catch (error) {
       recordProviderHealth(entry.id, { ok: false, ms: Date.now() - startedAt, error: error?.message || String(error) });
       try { renderChatProvidersList(); } catch (e) {}
@@ -13982,14 +14083,14 @@
       const I = global.WpsAiI18n;
       if (I?.resolvedLang?.() === "en") {
         const translated = I.t(suffix);
-        if (translated !== suffix) return "Lingxi AI · " + translated;
+        if (translated !== suffix) return "Wenxiaozhou · " + translated;
         // 组合后缀（如「更正式预览」「快速润色预览」）：整词没命中时拆掉「预览」再翻
         const m = /^(.+)预览$/.exec(suffix);
-        if (m) return "Lingxi AI · " + (I.t(m[1]) || m[1]) + " Preview";
-        return "Lingxi AI · " + suffix;
+        if (m) return "Wenxiaozhou · " + (I.t(m[1]) || m[1]) + " Preview";
+        return "Wenxiaozhou · " + suffix;
       }
     } catch (e) {}
-    return "灵犀AI " + suffix;
+    return "文小舟 " + suffix;
   }
 
   // 界面语言下拉：主面板 bindEvents 和设置 dialog 分支都要绑（设置实际通过 ?mode=settings
@@ -14020,10 +14121,42 @@
     });
   }
 
+  function bindRibbonPositionControl() {
+    const sel = els.ribbonPositionSelect;
+    if (!sel || sel.dataset.positionBound === "1") return;
+    sel.dataset.positionBound = "1";
+    const base = global.WpsAiRuntime?.proxyBase?.() || "http://127.0.0.1:3890";
+    const t = (s) => global.WpsAiI18n?.t?.(s) || s;
+    fetch(base + "/ribbon-position").then((res) => {
+      if (!res.ok) throw new Error("load failed");
+      return res.json();
+    }).then((data) => {
+      sel.value = data.position;
+      sel.disabled = false;
+    }).catch(() => showMessage(t("无法读取 Ribbon 入口位置，请检查本地服务。"), "error"));
+    sel.addEventListener("change", async () => {
+      sel.disabled = true;
+      try {
+        const res = await fetch(base + "/ribbon-position", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ position: sel.value })
+        });
+        if (!res.ok) throw new Error("save failed");
+        const data = await res.json();
+        sel.value = data.position;
+        showMessage(t("Ribbon 入口位置已保存，重启 WPS 后生效。"), "info", { duration: 6000 });
+        sel.disabled = false;
+      } catch (e) {
+        showMessage(t("保存 Ribbon 入口位置失败，请检查本地服务并重新打开设置。"), "error");
+      }
+    });
+  }
+
   function bindEvents() {
     els.providerSelect.addEventListener("change", refreshProviderConfigVisibility);
     els.operationModeSelect.addEventListener("change", () => renderProviderState());
     bindUiLanguageControl();
+    bindRibbonPositionControl();
     // 语言热切换后重算 JS 拼接的组合文案（宿主标题/模式提示等自动翻译够不着的）
     window.addEventListener("lingxi-lang-changed", () => {
       try { renderQuickActions(); } catch (e) {}
@@ -14137,7 +14270,7 @@
         if (chatBusy) return;
         _skillSuggest.dismissed = true;
         if (els.skillSuggestBar) els.skillSuggestBar.classList.add("hidden");
-        runChatTurn("把我们刚才这轮对话里做的操作总结成一个可复用的灵犀AI技能：起一个简洁的技能名，写清楚适用场景（description，便于以后判断何时套用），再把关键步骤 / 要点 / 坑整理成 content，用 save_skill 保存。");
+        runChatTurn("把我们刚才这轮对话里做的操作总结成一个可复用的文小舟技能：起一个简洁的技能名，写清楚适用场景（description，便于以后判断何时套用），再把关键步骤 / 要点 / 坑整理成 content，用 save_skill 保存。只根据对话历史里已经做过的操作来总结：不要重新执行任何工具，不要改动当前文档或表格（尤其不要重跑写入 / 格式 / 边框等修改类操作），这一轮只调用 save_skill 一个工具。", { skillSummary: true });
       });
     }
     if (els.skillSuggestDismissBtn) {
@@ -15191,6 +15324,7 @@
       els.addImageProviderBtn?.addEventListener("click", addImageProvider);
       // 界面语言下拉同理：dialog 分支必须自己绑（bindEvents 只在主面板跑）
       bindUiLanguageControl();
+      bindRibbonPositionControl();
       // MCP 客户端设置面板也必须在 dialog 分支 init —— #mcpClientAddBtn / #mcpClientList 只存在于
       // 独立设置窗口，主 TaskPane 的 init 在本分支 return 之后才跑，设置窗口根本跑不到 →
       // 之前点「新增 MCP 服务」没有任何反应（与历史上 addImageProviderBtn 同款漏绑 bug）。
@@ -17493,7 +17627,7 @@
   function buildSampleData(layoutName) {
     // 用于画廊缩略图与点击后载入的演示用数据
     switch (layoutName) {
-      case "cover": return { title: "灵犀 AI\n演示文稿", subtitle: "你的副标题", tag: "2026 KEYNOTE" };
+      case "cover": return { title: "文小舟\n演示文稿", subtitle: "你的副标题", tag: "2026 KEYNOTE" };
       case "section": return { number: "01", title: "章节标题", footer: "SECTION" };
       case "content": return { title: "核心要点", body: "第一条要点\n第二条要点\n第三条要点", tag: "OVERVIEW", footer: "" };
       case "stat": return { number: "98%", label: "增长率", description: "相较上一周期" };
@@ -17507,12 +17641,12 @@
         role: "Designer"
       };
       case "comparison": return {
-        title: "传统方式 vs 灵犀 AI",
+        title: "传统方式 vs 文小舟",
         leftIcon: "x-circle",
         leftLabel: "传统方式",
         leftBody: "手工排版耗时\n配色全凭手感\n字体混用混乱\n改一处全页重排",
         rightIcon: "check-circle",
-        rightLabel: "灵犀 AI",
+        rightLabel: "文小舟",
         rightBody: "一句话生成\n色板自动统一\n字体白名单约束\n字段独立可微调"
       };
       case "metric-trio": return {

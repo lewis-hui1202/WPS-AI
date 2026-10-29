@@ -2,9 +2,9 @@
 <customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="OnAddinLoad">
   <ribbon startFromScratch="false">
     <tabs>
-      <tab id="wpsAiTab" label="Lingxi AI" getLabel="GetLabel_tab_wpsAiTab" 	insertBeforeMso="TabHome">
-        <group id="lingxiCore" label="Lingxi AI" getLabel="GetLabel_group_lingxiCore">
-          <button id="openWpsAiPane" label="Open Lingxi AI" getLabel="GetLabel_openWpsAiPane" size="large" image="images/ai.png" onAction="OnAction_openWpsAiPane" getImage="GetImage_openWpsAiPane" getVisible="OnGetVisible" getEnabled="OnGetEnabled"/>
+      <tab id="wpsAiTab" label="Wenxiaozhou" getLabel="GetLabel_tab_wpsAiTab" 	insertBeforeMso="TabHome">
+        <group id="lingxiCore" label="Wenxiaozhou" getLabel="GetLabel_group_lingxiCore">
+          <button id="openWpsAiPane" label="Open Wenxiaozhou" getLabel="GetLabel_openWpsAiPane" size="large" image="images/ai.png" onAction="OnAction_openWpsAiPane" getImage="GetImage_openWpsAiPane" getVisible="OnGetVisible" getEnabled="OnGetEnabled"/>
         </group>
         <group id="lingxi_wps_writing" label="Writing" getLabel="GetLabel_group_lingxi_wps_writing">
           <button id="quick.wps.helpWrite" label="Help me write" getLabel="GetLabel_quick_wps_helpWrite" size="normal" image="images/icons/writing.png" onAction="OnAction_quick_wps_helpWrite" getImage="GetImage_quick_wps_helpWrite" getEnabled="OnGetEnabled"/>

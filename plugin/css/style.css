@@ -98,6 +98,12 @@ code {
   box-sizing: border-box;
 }
 
+/* WPS 12.1 on Windows can overlay the top 103px of a docked task pane with
+   its ribbon while still reporting that area in the WebView viewport. */
+html.wps-docked-pane-inset body:not(.is-floating) .app-shell {
+  padding-top: 111px;
+}
+
 .app-header {
   flex: none;
   display: flex;
@@ -123,7 +129,7 @@ code {
   width: 28px;
   height: 28px;
   border-radius: var(--radius-sm);
-  background: var(--primary-soft);
+  background: transparent;
   color: var(--text);
   display: flex;
   align-items: center;
@@ -131,10 +137,10 @@ code {
   flex: none;
 }
 
-.brand-logo svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
+.brand-logo img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .brand-name {
@@ -2396,9 +2402,7 @@ textarea#resultOutput {
   width: 20px;
   height: 20px;
   display: block;
-  background: currentColor;
-  -webkit-mask: url("../images/ai.svg") center / contain no-repeat;
-  mask: url("../images/ai.svg") center / contain no-repeat;
+  background: url("../images/ai.png") center / contain no-repeat;
 }
 
 /* AI 过程消息（思考、工具调用、回看工具流）也显示 AI 头像，布局与普通 AI 气泡保持一致。 */
@@ -3764,7 +3768,7 @@ html.settings-mode #presetPickerModal { z-index: 1500; }
 .tab-bar-action { flex: none; white-space: nowrap; }
 
 @media (max-width: 720px) {
-  /* Header：藏"灵犀AI"四个字（logo 已经够识别），让 model select / authBadge 拿更多宽度 */
+  /* Header：藏"文小舟"四个字（logo 已经够识别），让 model select / authBadge 拿更多宽度 */
   .brand-name { display: none; }
   /* authBadge"未配置/已登录"这种状态信息次要，在 modelSelect 旁边藏掉 */
   #authBadge { display: none; }

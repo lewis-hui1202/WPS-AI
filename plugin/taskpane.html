@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>灵犀AI</title>
+    <title>文小舟</title>
     <link rel="stylesheet" href="./js/vendor/ant-design-vue/reset.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <script>
@@ -61,14 +61,10 @@
       <header class="app-header">
         <div class="brand">
           <div class="brand-logo">
-            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M11 8 L12.3 11.5 L15.8 12.8 L12.3 14.1 L11 17.6 L9.7 14.1 L6.2 12.8 L9.7 11.5 Z" />
-              <path d="M22 19 L22.85 21.3 L25.15 22.15 L22.85 23 L22 25.3 L21.15 23 L18.85 22.15 L21.15 21.3 Z" />
-              <path d="M24 8 L24.5 9.4 L25.9 9.9 L24.5 10.4 L24 11.8 L23.5 10.4 L22.1 9.9 L23.5 9.4 Z" />
-            </svg>
+            <img src="./images/ai.png" alt="" aria-hidden="true" />
           </div>
           <div class="brand-text-group">
-            <h1 class="brand-name">灵犀AI</h1>
+            <h1 class="brand-name">文小舟</h1>
             <div class="brand-version-row">
               <span id="brandVersion" class="brand-version">v…</span>
               <span id="proxyStatusBadge" class="proxy-status-badge proxy-status-pending" title="本地代理检测中">检测中</span>
@@ -347,6 +343,16 @@
                 </label>
 
                 <label class="field">
+                  <span>Ribbon 入口位置</span>
+                  <select id="ribbonPositionSelect" disabled>
+                    <option value="before-home">开始之前（默认）</option>
+                    <option value="after-home">开始之后</option>
+                    <option value="end">选项卡末尾</option>
+                  </select>
+                  <small class="field-tip">更改后需重启 WPS 才能生效，适用于所有 Office 组件。</small>
+                </label>
+
+                <label class="field">
                   <span>AI 操作模式</span>
                   <select id="operationModeSelect">
                     <option value="direct">直接操作wps(推荐)</option>
@@ -371,7 +377,7 @@
                     <label class="host-toggle"><input type="checkbox" id="enableHostWpp" /><span>PPT（演示）</span></label>
                     <label class="host-toggle"><input type="checkbox" id="enableHostPdf" /><span>PDF</span></label>
                   </div>
-                  <small class="field-tip">只在勾选的组件里加载灵犀AI 加载项。取消勾选后对应组件不再显示插件按钮。改动需<strong>重启 WPS</strong> 后生效。</small>
+                  <small class="field-tip">只在勾选的组件里加载文小舟 加载项。取消勾选后对应组件不再显示插件按钮。改动需<strong>重启 WPS</strong> 后生效。</small>
                 </div>
 
                 <label class="field">
@@ -589,7 +595,7 @@
                     <section class="config-card about-hero">
                       <div class="about-hero-main">
                         <div class="about-title-row">
-                          <span class="about-title">灵犀AI</span>
+                          <span class="about-title">文小舟</span>
                           <span id="aboutVersion" class="about-version" title="双击显示设备 SN">v…</span>
                         </div>
                         <p class="muted about-desc">WPS Office 加载项 · 多 provider AI 写作助手</p>
@@ -895,7 +901,7 @@
 
         <!-- 修订模式（仅 WPS 文字）：开后 AI 改动记为 Word 原生修订，可逐条接受 / 全部回撤 -->
         <div id="reviseModeBar" class="revise-mode-bar hidden">
-          <label class="revise-toggle" title="开启后 AI 对文档的改动会记为 Word 原生修订（可逐条接受 / 拒绝），作者标为「灵犀AI」，方便像审稿一样审 AI 的改动">
+          <label class="revise-toggle" title="开启后 AI 对文档的改动会记为 Word 原生修订（可逐条接受 / 拒绝），作者标为「文小舟」，方便像审稿一样审 AI 的改动">
             <input type="checkbox" id="reviseModeToggle" />
             <span class="revise-toggle-track"><span class="revise-toggle-thumb"></span></span>
             <span class="revise-toggle-text">

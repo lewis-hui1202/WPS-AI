@@ -99,7 +99,7 @@ test("ribbon.xml 的 tab/group/button 都带 getLabel 回调", () => {
 
 test("ribbon.en.xml 存在且 label 全部为英文（无未翻译中文残留）", () => {
   const xml = fs.readFileSync(path.join(__dirname, "..", "ribbon.en.xml"), "utf8");
-  assert.match(xml, /label="Lingxi AI"/);
+  assert.match(xml, /label="Wenxiaozhou"/);
   const labels = xml.match(/label="[^"]*"/g) || [];
   const cn = labels.filter((l) => /[一-龥]/.test(l));
   assert.deepEqual(cn, [], `英文 ribbon 里不应有中文 label：${cn.join(" ")}`);

@@ -1,14 +1,14 @@
 @echo off
-REM ??????????AI Windows ?????
-REM ?锟斤拷???????????,????? cd installer && build.bat
-REM ????
-REM   1. ? Inno Setup Compiler  https://jrsoftware.org/isdl.php
-REM   2. ???? cd plugin && node tools\bundle-node.js ?o? portable Node
+REM Build the Wenxiaozhou AI Windows installer.
+REM Run from the repository root with: cd installer && build.bat
+REM Requirements:
+REM   1. Inno Setup Compiler: https://jrsoftware.org/isdl.php
+REM   2. Portable Node runtime: cd plugin && node tools\bundle-node.js
 
 setlocal
 cd /d "%~dp0"
 
-REM ?? ISCC.exe
+REM Locate ISCC.exe.
 set "ISCC="
 if exist "%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe" set "ISCC=%ProgramFiles(x86)%\Inno Setup 6\ISCC.exe"
 if exist "%ProgramFiles%\Inno Setup 6\ISCC.exe"      set "ISCC=%ProgramFiles%\Inno Setup 6\ISCC.exe"
@@ -18,29 +18,37 @@ REM Only fall back to IS5 when no IS6 is found (previously it unconditionally ov
 if "%ISCC%"=="" if exist "%ProgramFiles(x86)%\Inno Setup 5\ISCC.exe" set "ISCC=%ProgramFiles(x86)%\Inno Setup 5\ISCC.exe"
 
 if "%ISCC%"=="" (
-  echo [X] ???? Inno Setup Compiler ^(ISCC.exe^)??
-  echo     ??? https://jrsoftware.org/isdl.php ???? Inno Setup 6 ?????
+  echo [X] Inno Setup Compiler ^(ISCC.exe^) was not found.
+  echo     Install Inno Setup 6 from https://jrsoftware.org/isdl.php
   pause
   exit /b 1
 )
 
-REM 锟斤拷?? runtime/ ?????
+REM Check the bundled Node runtime.
 if not exist "..\plugin\runtime\node-win-x64\node.exe" (
-  echo [X] plugin\runtime\node-win-x64\node.exe ???????
-  echo     ?????? plugin ????: node tools\bundle-node.js
+  echo [X] Bundled Node runtime is missing: plugin\runtime\node-win-x64\node.exe
+  echo     Build it from the plugin directory: node tools\bundle-node.js
   pause
   exit /b 1
 )
 
 echo [build] ISCC: %ISCC%
-echo [build] ???? installer\lingxi-ai.iss...
-"%ISCC%" lingxi-ai.iss
+echo [build] Reading version from plugin\package.json...
+for /f "usebackq delims=" %%V in (`powershell -NoProfile -Command "$p=ConvertFrom-Json -InputObject ([IO.File]::ReadAllText('..\plugin\package.json')); Write-Output $p.version"`) do set "PLUGIN_VERSION=%%V"
+if "%PLUGIN_VERSION%"=="" (
+  echo [X] Could not read version from plugin\package.json.
+  pause
+  exit /b 1
+)
+echo [build] Version: %PLUGIN_VERSION%
+echo [build] Compiling installer\lingxi-ai.iss...
+"%ISCC%" /DMyAppVersion="%PLUGIN_VERSION%" lingxi-ai.iss
 if errorlevel 1 (
-  echo [X] ???????
+  echo [X] Installer compilation failed.
   pause
   exit /b 1
 )
 
 echo.
-echo [build] ??锟斤拷??????? dist\lingxi-ai-*-setup.exe
+echo [build] Done. Output: dist\lingxi-ai-*-setup.exe
 pause

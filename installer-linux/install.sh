@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI Linux 绿色包安装入口(tar.gz 解压后跑这个)
+# 文小舟 Linux 绿色包安装入口(tar.gz 解压后跑这个)
 #
 # 用法:
 #   tar -xzf lingxi-ai-<version>-linux-<arch>.tar.gz
@@ -47,7 +47,7 @@ TARGET_HOME="${TARGET_HOME:-$HOME}"
 TARGET_UID="$(id -u "$TARGET_USER" 2>/dev/null || id -u)"
 
 echo "============================================="
-echo "  灵犀AI Linux 安装"
+echo "  文小舟 Linux 安装"
 echo "============================================="
 echo "  Prefix:       $PREFIX"
 echo "  Target user:  $TARGET_USER (uid=$TARGET_UID)"
@@ -107,7 +107,7 @@ echo "  日志:    $TARGET_HOME/.lingxi-ai/install.log"
 echo
 echo "  下一步:"
 echo "    1. 完全退出 WPS"
-echo "    2. 重新打开 WPS,顶部会出现「灵犀AI」标签页"
+echo "    2. 重新打开 WPS,顶部会出现「文小舟」标签页"
 echo
 echo "  卸载: bash $SCRIPT_DIR/uninstall.sh"
 echo "       (sudo 装的就 sudo bash uninstall.sh)"

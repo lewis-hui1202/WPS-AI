@@ -104,7 +104,14 @@
     const cand = payload?.candidates?.[0];
     const parts = cand?.content?.parts || [];
     for (const p of parts) {
-      if (p && p.functionCall) { out.functionCalls.push({ name: p.functionCall.name, args: p.functionCall.args || {} }); continue; }
+      if (p && p.functionCall) {
+        out.functionCalls.push({
+          name: p.functionCall.name,
+          args: p.functionCall.args || {},
+          ...(p.functionCall.id != null ? { id: p.functionCall.id } : {})
+        });
+        continue;
+      }
       if (p && typeof p.text === "string") {
         if (p.thought === true) out.thoughts.push(p.text);
         else out.texts.push(p.text);
@@ -237,10 +244,16 @@
           let fullText = "";
           let reasoningText = "";
           const functionCalls = [];
+          const modelParts = [];
           let usage = null;
 
           await global.WpsAiSse.readSse(response, async (_eventType, payload) => {
             if (!payload) return;
+            // Gemini 3+ requires thoughtSignature on the original functionCall part
+            // in the next request. Keep every streamed model part in order instead
+            // of reconstructing calls from name/args and losing their metadata.
+            const parts = payload?.candidates?.[0]?.content?.parts;
+            if (Array.isArray(parts)) modelParts.push(...parts);
             const c = classifyChunk(payload);
             for (const th of c.thoughts) {
               reasoningText += th;
@@ -258,10 +271,7 @@
 
           if (reasoningText) await onEvent?.({ type: "reasoning_end", text: reasoningText });
 
-          // 回填模型这一轮的 content（文本 + functionCall 各 part），保持上下文
-          const modelParts = [];
-          if (fullText) modelParts.push({ text: fullText });
-          for (const fc of functionCalls) modelParts.push({ functionCall: { name: fc.name, args: fc.args || {} } });
+          // 原样回填模型 parts，包括 thoughtSignature、思考 part 与工具调用顺序。
           if (modelParts.length) contents.push({ role: "model", parts: modelParts });
 
           if (fullText) await onEvent?.({ type: "assistant_text_end", text: fullText });
@@ -291,6 +301,7 @@
             responseParts.push({
               functionResponse: {
                 name: call.name,
+                ...(call.id != null ? { id: call.id } : {}),
                 response: { result: global.WpsAiToolRegistry.serializeResult(result) }
               }
             });

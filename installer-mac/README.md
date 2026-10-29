@@ -1,4 +1,4 @@
-# 灵犀AI macOS Installer
+# 文小舟 macOS Installer
 
 打包 macOS 安装包，产出 `lingxi-ai-<version>-mac.dmg`（内含 `.pkg`，双击走系统安装向导）。
 

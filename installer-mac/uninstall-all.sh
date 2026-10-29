@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# 灵犀AI 一键卸载脚本
+# 文小舟 一键卸载脚本
 #
-# 由 /Applications/灵犀AI 卸载.app 在 admin 上下文调起(root 身份跑)。
+# 由 /Applications/文小舟 卸载.app 在 admin 上下文调起(root 身份跑)。
 # 也支持手跑做调试: sudo TARGET_USER=$(whoami) TARGET_HOME=$HOME TARGET_UID=$(id -u) \
 #                         bash uninstall-all.sh
 #
@@ -25,7 +25,7 @@ if [ -z "$TARGET_USER" ] || [ "$TARGET_USER" = "root" ] || [ -z "$TARGET_HOME" ]
   exit 1
 fi
 
-echo "==== 灵犀AI 卸载 $(date '+%F %T') ===="
+echo "==== 文小舟 卸载 $(date '+%F %T') ===="
 echo "用户: $TARGET_USER  uid: $TARGET_UID  home: $TARGET_HOME"
 echo
 
@@ -82,7 +82,7 @@ pkgutil --forget com.lingxi-ai.installer 2>/dev/null || true
 #    bash 短脚本几乎一定一次性读进内存,删自己所在路径不会中断后续命令,
 #    但保险起见把这一步放最后(下面就只剩 exit)。
 echo "[7/7] 删 .app 自身..."
-SELF_APP_DEFAULT="/Applications/灵犀AI 卸载.app"
+SELF_APP_DEFAULT="/Applications/文小舟 卸载.app"
 APP_TO_DELETE="${SELF_APP:-$SELF_APP_DEFAULT}"
 if [ -d "$APP_TO_DELETE" ]; then
   rm -rf "$APP_TO_DELETE" && echo "  删 $APP_TO_DELETE" || echo "  [WARN] 删 .app 失败,请手动拖到废纸篓"

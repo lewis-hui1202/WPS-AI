@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://wps-ai.llteac.cn/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/download</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/download"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/download"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/download"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/docs</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/docs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/docs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/docs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/changelog</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/changelog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/changelog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/changelog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/en/download</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/download"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/download"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/download"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/en/docs</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/docs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/docs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/docs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://wps-ai.llteac.cn/en/changelog</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://wps-ai.llteac.cn/changelog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://wps-ai.llteac.cn/en/changelog"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://wps-ai.llteac.cn/changelog"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.4</priority>
+  </url>
+</urlset>

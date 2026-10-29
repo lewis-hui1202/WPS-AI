@@ -181,6 +181,26 @@ test("mac/linux ribbon 快捷生图也打开 dialog 而不是右侧 TaskPane", (
   assert.equal(calls.showDialog.url, "http://127.0.0.1:3889/taskpane.html?pane=dialog");
 });
 
+test("Windows WPS 文字打开主面板时使用浮窗，避免停靠窗格导致功能区卡死", () => {
+  const calls = {};
+  const { sandbox } = loadAdapter({
+    navigator: { userAgent: "Windows NT 10.0", platform: "Win32" },
+    Application: {
+      ActiveDocument: { FullName: "C:\\test\\example.docx", Saved: true },
+      CreateTaskPane() { calls.created = true; },
+      ShowDialog(url, title, width, height, modal) { calls.dialog = { url, modal }; }
+    }
+  });
+  sandbox.OnAction("openWpsAiPane");
+  assert.equal(calls.created, undefined);
+  assert.equal(calls.dialog.url, "http://127.0.0.1:3889/taskpane.html?pane=dialog");
+  assert.equal(calls.dialog.modal, false);
+});
+
+test("浮窗不使用停靠窗格的顶部留白", () => {
+  assert.match(appJs, /isNativeWindowsPane[\s\S]{0,400}!.*pane.*dialog/);
+});
+
 test("PDF 对照翻译在缺少 ShowDialog 时会直接 window.open 最终 dialog", async () => {
   const { sandbox, storage } = loadAdapter({
     Application: {
@@ -249,7 +269,7 @@ test("PDF 对照翻译直接打开最终 dialog，并把 docPath 写入 localSto
   await flushPromises();
 
   assert.equal(calls.showDialog.url, "http://127.0.0.1:3889/taskpane.html?mode=paralleltranslate");
-  assert.equal(calls.showDialog.title, "灵犀AI 对照翻译");
+  assert.equal(calls.showDialog.title, "文小舟 对照翻译");
   assert.equal(calls.showDialog.modal, true);
   const req = JSON.parse(storage.get("ls:lingxi_parallel_translate_dialog_request_v1"));
   assert.equal(req.docPath, "/tmp/direct.pdf");
@@ -284,7 +304,7 @@ test("PDF 对照翻译在宿主不暴露路径时仍会打开 dialog，并写入
   await flushPromises();
 
   assert.equal(calls.showDialog.url, "http://127.0.0.1:3889/taskpane.html?mode=paralleltranslate");
-  assert.equal(calls.showDialog.title, "灵犀AI 对照翻译");
+  assert.equal(calls.showDialog.title, "文小舟 对照翻译");
   const req = JSON.parse(storage.get("ls:lingxi_parallel_translate_dialog_request_v1"));
   assert.equal(req.docPath, "");
 });

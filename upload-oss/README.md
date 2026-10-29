@@ -1,6 +1,6 @@
 # upload-oss
 
-把灵犀AI 安装包（Windows `.exe` / macOS `.pkg` / `.dmg` / Linux 包）上传到阿里云 OSS，
+把文小舟 安装包（Windows `.exe` / macOS `.pkg` / `.dmg` / Linux 包）上传到阿里云 OSS，
 并把最新版本、下载地址、文件大小写入 `manifest.json`。
 
 ## 一次性配置

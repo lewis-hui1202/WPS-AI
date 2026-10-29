@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 灵犀AI WPS MCP 服务 —— 把 WPS plugin 暴露的工具通过 stdio JSON-RPC 协议提供给
+ * 文小舟 WPS MCP 服务 —— 把 WPS plugin 暴露的工具通过 stdio JSON-RPC 协议提供给
  * 外部 agent（Claude Code CLI / Claude Desktop / Cursor 等）使用。
  *
  * 工作流：

@@ -159,16 +159,17 @@ function buildLinuxDocker(version, extraArgs) {
     const i = extraArgs.indexOf('--arch')
     return i >= 0 && extraArgs[i + 1] ? extraArgs[i + 1] : 'x64'
   })()
-  const dockerPlatform = arch === 'arm64' ? 'linux/arm64' : 'linux/amd64'
+  // The packaging tools can emit arm64 archives from an amd64 builder.
+  // Avoid executing arm64 userspace through QEMU on x86_64 Docker Desktop.
+  const dockerPlatform = 'linux/amd64'
 
   // 镜像 tag 带 platform 后缀，免得 amd64 / arm64 镜像互相覆盖
-  const archTag = arch === 'arm64' ? 'arm64' : 'amd64'
-  const imageTag = `lingxi-ai-linux-build:${archTag}`
+  const imageTag = 'lingxi-ai-linux-build:amd64'
   const dockerCtx = path.join(ROOT, 'installer-linux')
 
   // 跨架构模拟必须在「docker build」之前就绪：build 的 RUN 步骤也在目标架构容器里跑，
   // 缺 QEMU 一样会报 "exec format error"。原生架构直接返回、零开销。
-  ensureBinfmt(dockerPlatform)
+  // The builder is always amd64, so QEMU/binfmt registration is unnecessary.
 
   // 镜像不存在就 build（带 --platform 强制对齐架构）
   const inspect = spawnSync('docker', ['image', 'inspect', imageTag], { stdio: 'ignore' })

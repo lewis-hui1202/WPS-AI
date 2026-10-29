@@ -108,6 +108,7 @@
     "js/mindmap.js", // 文档脑图：markdown 大纲 → echarts tree 数据
     "js/hosts/writer.js",
     "js/hosts/spreadsheet.js",
+    "js/hosts/presentation-order.js",
     "js/hosts/presentation.js",
     "js/hosts/pdf.js",
     "js/wps.js",
@@ -136,6 +137,7 @@
     "js/chat/blocks.js",
     "js/chat/compress.js", // 长对话自动摘要压缩（纯逻辑；app.js 轮末调用）
     "js/chat/history-sanitize.js", // 跨模型安全边界：出站历史剥工具结构/特有角色
+    "js/chat/todo-completion.js",
     "js/chat/timeline.js",   // 聊天时间轴渲染（文档流 + 步骤轨道）
 
     "js/token-usage.js",

@@ -1,0 +1,549 @@
+{
+  "nav": {
+    "home": "Home",
+    "download": "Download",
+    "docs": "Docs",
+    "changelog": "Changelog",
+    "github": "GitHub",
+    "brand_sub": "WPS Office AI Assistant"
+  },
+  "footer": {
+    "copy": "© {year} Wenxiaozhou · Built with Claude vibe coding"
+  },
+  "index": {
+    "rename_notice": "Brand notice: To avoid confusion with WPS's official plugin, this add-in has been renamed from Lingxi AI to Wenxiaozhou.",
+    "badge_released": "v{version} · Released",
+    "head_title": "Wenxiaozhou · Multi-host AI Assistant for WPS Office",
+    "h1_1": "An AI Assistant Built for",
+    "h1_2": "WPS Office",
+    "lead": "A single TaskPane running across WPS Writer, Spreadsheets, Presentation, and PDF. Hook up multiple LLMs (Codex / OpenAI / Anthropic / Gemini / Azure / OpenAI-compatible — 15 presets) plus two-way MCP, and let AI read and write documents directly through 149 tools — conditional formatting, charts, comment & revision review, PPT generation, PDF translation, all in a single chat.",
+    "btn_download": "Download Now",
+    "alt_link_prefix": "More versions:",
+    "alt_link_github": "GitHub Releases",
+    "window_title": "WPS Writer · Wenxiaozhou",
+    "msg_user": "Summarize this into 3 key points",
+    "msg_ai_name": "Wenxiaozhou",
+    "msg_ai_status": "Selection read, calling {tool} to write directly to the document...",
+    "composer_placeholder": "Ask something / {'@'} to select context",
+    "features_title": "Key Features",
+    "features": [
+      { "title": "Universal TaskPane", "desc": "A unified panel for Writer, Spreadsheets, Presentation, and PDF. Presentation presets are encapsulated into a separate WPS dialog window." },
+      { "title": "Multi-protocol · Multi-LLM", "desc": "Codex / Anthropic / native Gemini / Azure OpenAI / OpenAI Responses + OpenAI-compatible — 15 presets, plus two-way MCP to reach external tools. Switch anytime via provider groupings." },
+      { "title": "149 Tools, Direct Editing", "desc": "From reading & writing text to conditional formatting / data validation / charts / tables / sparklines, comment & revision review, paragraph & page layout, animations / SmartArt, export PDF / save-as / print — AI acts through tools." },
+      { "title": "Multimodal + Live Reasoning", "desc": "Attach images or PDFs as context; reasoning streams live in arrival order, with parameters auto-mapped per provider." },
+      { "title": "PPT Themes & Charts", "desc": "50+ design palettes and 17 HTML layouts. AI generates and rewrites themes, charts and layouts directly, with a drag-and-drop visual editor." },
+      { "title": "Out-of-the-box · Cross-platform", "desc": "Built-in portable Node runtime. Runs on Windows, macOS, and Linux, including domestic OS like Kylin and UOS." }
+    ],
+    "community": {
+      "title": "Need help? Join our community",
+      "lead": "Scan the QR code to follow our WeChat Official Account, reply 'ai' to get the group link, discuss with other users, and report bugs.",
+      "step1": "Scan the QR code with WeChat and follow",
+      "step2": "Reply 'ai' in the chat dialog",
+      "step3": "Get the group link to join and report issues",
+      "qr_label": "Scan to follow on WeChat"
+    },
+    "stats": [
+      { "num": "4", "label": "Full Host Coverage", "sub": "Writer / Spreadsheets / Presentation / PDF" },
+      { "num": "15+", "label": "Preset AI Providers", "sub": "Codex / Claude / Gemini / Azure / DeepSeek…" },
+      { "num": "149", "label": "Callable Tools", "sub": "read-write / format / charts / review / export…" },
+      { "num": "100%", "label": "AI vibe coding", "sub": "by Claude · Zero manual coding" }
+    ]
+  },
+  "download": {
+    "head_title": "Download · Wenxiaozhou",
+    "badge_download": "v{version} · Download Now",
+    "h1": "Download Wenxiaozhou",
+    "lead": "Choose your platform and download the installer. Comes with a built-in Node runtime, no extra configuration required.",
+    "pending_badge": "Coming Soon",
+    "cta_size_note": "Built-in Node runtime, no extra installation required",
+    "btn_download": "Download Now",
+    "btn_disabled": "Coming Soon",
+    "linux_title": "Choose by Distribution",
+    "linux_sub": "Supports Deepin, UOS, openKylin, openEuler, Anolis, etc.",
+    "arch_x86": "x86_64",
+    "arch_arm": "aarch64 (Kunpeng/Phytium)",
+    "linux_foot_1": "For LoongArch/SW64/MIPS64, please use the tar.gz package (Node 18+ required)",
+    "linux_foot_2": "· View all architectures",
+    "install_title": "Installation Steps",
+    "sys_req_title": "System Requirements",
+    "more_docs": "Full Installation Guide",
+    "distros_title": "Supported Distributions",
+    "distros_desc_1": "The following distros have been verified. Other Linux distributions should generally work using the .tar.gz package. Report issues on ",
+    "distros_desc_2": ".",
+    "win_steps": [
+      "Temporarily disable antivirus real-time protection",
+      "Double-click setup.exe to install",
+      "Fully exit WPS and reopen it",
+      "The 'Wenxiaozhou' tab will appear on the Ribbon"
+    ],
+    "mac_steps": [
+      "Right-click .pkg → Open (to bypass Gatekeeper)",
+      "Enter your system password to authorize the installation",
+      "Fully exit WPS and reopen it",
+      "The 'Wenxiaozhou' tab will appear in the Add-ins panel"
+    ],
+    "linux_steps": [
+      "Choose .deb / .rpm / .tar.gz based on your distro",
+      "Install with a single command (apt / dnf / tar)",
+      "The installer automatically configures publish.xml and starts the systemd user service",
+      "Fully exit WPS and reopen it. The 'Wenxiaozhou' tab will appear"
+    ],
+    "win_req": [
+      "Windows 10 / 11 (x64)",
+      "WPS Office 12.x+",
+      "Built-in portable Node 22.x (no separate installation needed)"
+    ],
+    "mac_req": [
+      "macOS 10.15 Catalina+",
+      "Intel + Apple Silicon",
+      "WPS Office 5.x+",
+      "Built-in darwin-x64 + arm64 Node"
+    ],
+    "linux_req": [
+      "x86_64 / aarch64 mainstream and domestic distros",
+      "WPS for Linux 11.x+ (Pro or Personal edition)",
+      "systemd --user (enabled by default on mainstream distros)",
+      "Built-in portable Node 22.x · Automatically falls back to system Node on LoongArch/SW64"
+    ]
+  },
+  "docs": {
+    "head_title": "Docs · Wenxiaozhou v{version}",
+    "badge": "Installation Guide · v{version}",
+    "h1": "Wenxiaozhou Installation Guide",
+    "lead": "A comprehensive Beta installation manual covering WPS Writer, Spreadsheets, Presentation, and PDF. Detailed steps for Windows, macOS, and Linux (including domestic OS like openEuler, Anolis, etc.).",
+    "toc_title": "Contents",
+    "sections": {
+      "overview": "Two Installation Modes",
+      "windows": "Windows Permanent Install",
+      "macos": "macOS Permanent Install",
+      "linux": "Linux Permanent Install",
+      "requirements": "Prerequisites",
+      "debug": "Dev / Debug Mode",
+      "faq": "FAQ"
+    },
+    "modes": [
+      { "name": "Permanent Install", "tag": "Recommended", "suit": "Long-term usage", "desc": "Registers the plugin for all three WPS applications at once. The background service automatically starts on boot. No terminal required." },
+      { "name": "Dev / Debug Mode", "tag": "Temporary", "suit": "Trial or secondary development", "desc": "Uses npm run dev:*. Only applies to one host at a time and disappears once the script is closed." }
+    ],
+    "mode_suit_prefix": "Best for · ",
+    "callout_overview": "We recommend reading the 'Permanent Install' section first. If you just want to test it once, skip to 'Dev / Debug Mode'.",
+    "recommend_gui": "Recommended: GUI Installer (Foolproof)",
+    "recommend_pkg": "Recommended: GUI Installer (pkg, Foolproof)",
+    "win_steps": [
+      "Download {file} (Approx. 30MB, includes built-in Node runtime).",
+      "Double-click setup.exe and follow the wizard to install into C:\\Program Files\\LingxiAI (no admin rights required).",
+      "The installer will automatically generate the host variant in %USERPROFILE%\\.lingxi-ai\\, write publish.xml, register auto-start, and launch the background service.",
+      "Fully exit WPS (right-click from the system tray), reopen it, and look for the 'Wenxiaozhou' tab at the top.",
+      "Logs can be found at %USERPROFILE%\\.lingxi-ai\\server.log."
+    ],
+    "mac_steps": [
+      "Download {file} (Approx. 35MB, includes darwin-x64 + arm64 Node).",
+      "Right-click the .pkg -> Open. Unsigned versions will be blocked by Gatekeeper; click 'Open' in the warning dialog to bypass it.",
+      "Follow the wizard to install into /Library/Application Support/LingxiAI/ (requires system password once).",
+      "postinstall automatically selects Node based on CPU architecture, generates host variant to ~/.lingxi-ai/, writes publish.xml, and configures LaunchAgent.",
+      "Fully exit WPS -> Reopen any WPS app, and look for the 'Wenxiaozhou' tab at the top.",
+      "Logs: ~/.lingxi-ai/install.log (installation) + ~/.lingxi-ai/server.log (background service)."
+    ],
+    "info_win_uninstall_title": "Uninstall",
+    "info_win_uninstall_desc": "Start Menu -> 'Wenxiaozhou' -> 'Uninstall Wenxiaozhou'. This automatically stops the service, clears publish.xml and ~/.lingxi-ai, and removes the auto-start entry.",
+    "info_win_upgrade_title": "Upgrade",
+    "info_win_upgrade_desc": "Simply download the new setup.exe and run it. Inno Setup will replace it in place. Provider settings, OAuth Tokens, and model choices are saved in localStorage and won't be lost.",
+    "info_mac_uninstall_title": "Uninstall (One-click)",
+    "info_mac_uninstall_desc": "Search 'Wenxiaozhou Uninstall' in Spotlight or double-click 'Wenxiaozhou Uninstall.app' in Applications -> Enter system password. The script removes LaunchAgent, publish.xml, the installation directory, and the pkgutil receipt.",
+    "info_mac_upgrade_title": "Upgrade",
+    "info_mac_upgrade_desc": "Download the new .pkg -> Right-click and open it. preinstall stops the old service, and postinstall rewrites publish.xml and restarts LaunchAgent.",
+    "linux_intro": "Available in three package formats covering mainstream overseas and domestic Linux distributions, as well as domestic CPUs (LoongArch/SW64/RISC-V). Choose your package from the table below; the post-installation steps are identical.",
+    "linux_formats": [
+      { "target": "Ubuntu · Debian · Deepin · UOS · openKylin Desktop" },
+      { "target": "openEuler · Anolis OS · Kylin Server · NeoKylin · Fedora · RHEL · UOS Server" },
+      { "target": "Universal for all distros · LoongArch / SW64 / RISC-V CPUs (requires pre-installed Node 18+)" }
+    ],
+    "linux_uninstall_label": "Uninstall:",
+    "linux_install_happens": "What happens during installation?",
+    "linux_steps": [
+      "Choose package by distro: deb (Ubuntu/UOS/Kylin), rpm (openEuler/Kylin Server), or tar.gz (Universal fallback).",
+      "One-line installation (apt / dnf / tar). The maintainer script automatically detects the real logged-in user and runs user-space configurations.",
+      "post-install automatically selects Node via uname -m, generates host variants in ~/.lingxi-ai/, and writes publish.xml to 8 known WPS jsaddons paths (covering snap, flatpak, and UOS Linglong sandbox).",
+      "Writes and enables ~/.config/systemd/user/lingxi-ai.service; runs loginctl enable-linger to ensure the service runs even when logged out. Falls back to ~/.config/autostart/.desktop if systemd is unavailable.",
+      "Fully exit WPS -> Reopen any WPS app, the 'Wenxiaozhou' tab will appear.",
+      "Logs: ~/.lingxi-ai/install.log (install process) + journalctl --user -u lingxi-ai (background service)."
+    ],
+    "linux_info_arch_title": "Architecture Support",
+    "linux_info_arch_desc": "x86_64 (Mainstream) + aarch64 (Kunpeng 920 / Phytium D2000) have built-in Node 22. loongarch64 (Loongson) / sw_64 (Shenwei) / mips64el use the .tar.gz package and require a system-installed Node 18+.",
+    "linux_info_upg_title": "Upgrade",
+    "linux_info_upg_desc": "sudo dpkg -i ./new-version.deb or sudo dnf install ./new-version.rpm overwrites in place. postinst stops the old systemd unit and restarts after install. Settings and tokens in localStorage remain intact.",
+    "linux_info_verify_title": "Verification",
+    "req_col1": "Requirement",
+    "req_col2": "GUI Installer",
+    "req_col3": "Manual / Debug",
+    "req_col4": "Notes",
+    "req_builtin": "Built-in",
+    "reqs": [
+      { "item": "WPS Office", "note": "Both domestic and international versions. Windows 12.x+, macOS 5.x+, Linux WPS 11.x+." },
+      { "item": "Node.js LTS", "note": "GUI installers have built-in portable Node. Manual setups or domestic CPUs require 18+ / 20+." },
+      { "item": "systemd --user", "note": "Required for Linux permanent mode only. Enabled by default on mainstream distros; falls back to XDG autostart on CentOS 7/containers." },
+      { "item": "wpsjs CLI", "note": "Required for debug mode only. The script runs npm install -g wpsjs automatically." }
+    ],
+    "debug_intro": "Best for quick local testing or making code changes. Can only be applied to one host application at a time.",
+    "debug_win": "Windows Debug Mode",
+    "debug_win_steps": [
+      "Extract {file} to any directory.",
+      "Go to the plugin/ folder and double-click install-windows.bat. It checks for Node, globally installs wpsjs, and runs npm install.",
+      "Keep the window open and double-click the startup script for your target app: start-wps.bat / start-et.bat / start-wpp.bat.",
+      "The script launches a local CORS proxy (3890) + wpsjs debug service (3889), and automatically opens the WPS client.",
+      "Find the 'Wenxiaozhou' group in the top ribbon and click 'Open Wenxiaozhou'."
+    ],
+    "debug_mac": "macOS Debug Mode",
+    "debug_mac_steps": [
+      "Extract to any directory, e.g., ~/lingxi-ai/.",
+      "Open terminal and cd into the plugin/ folder.",
+      "Run bash install-mac.sh (invoking via bash bypasses Gatekeeper quarantine).",
+      "Fully exit WPS.",
+      "Run the startup script: bash start-wps.sh / start-et.sh / start-wpp.sh.",
+      "Reopen WPS. If the group doesn't appear, enable lingxi-ai in the 'Add-ins' panel."
+    ],
+    "debug_linux": "Linux Debug Mode",
+    "debug_linux_steps": [
+      "Extract the .tar.gz package to any directory or git clone the repo.",
+      "cd into the plugin/ folder and install Node 18+ (if not using built-in).",
+      "Run npm install to install dependencies.",
+      "Run npm run dev:wps / dev:et / dev:wpp / dev:pdf to start the dev service for the target host.",
+      "WPS will be launched automatically by wpsjs. The 'Wenxiaozhou' tab will appear in the Add-ins panel.",
+      "Make code changes -> simply refresh the WPS Add-ins panel, no need to restart the script."
+    ],
+    "faqs": [
+      { "q": "Charts / Visual templates report 'Proxy server returned 404' after plugin loads", "a": "The proxy server is an old process (didn't have the /upload-image route when started). In debug mode, press Ctrl-C to restart the script; in permanent mode, just rerun the install script." },
+      { "q": "Cannot see the 'Wenxiaozhou' group in WPS", "a": "Permanent mode: Check if the scheduled task / LaunchAgent is registered and look at server.log for errors. Debug mode: Fully exit WPS (use right-click Quit on macOS Dock) and reopen." },
+      { "q": "Ports 3889 / 3890 are occupied", "a": "In debug mode, append --port to the dev command in package.json, or set the PROXY_PORT env var. In permanent mode, use LINGXI_STATIC_PORT / PROXY_PORT to start." },
+      { "q": "Can I install completely offline?", "a": "Yes. First run npm install -g wpsjs on an internet-connected machine, then copy wpsjs along with plugin/node_modules to the identical location on the target machine." },
+      { "q": "macOS reports 'Main resource content verification failed'", "a": "WKWebView has cached old resources. Stop the service -> Clear ~/Library/Containers/com.kingsoft.wpsoffice.mac[.global]/Data/Library/Caches/* -> Restart the service." },
+      { "q": "macOS running ./xxx.sh directly reports operation not permitted", "a": "The zip extraction added the com.apple.quarantine attribute. Solutions: run 'bash xxx.sh', or run 'xattr -dr com.apple.quarantine .'." },
+      { "q": "360 Security Center blocks setup.exe", "a": "Temporarily exit 360 before installing, then restart it and whitelist the installation directory; or 'Always Allow' all LingxiAI entries in 360's action log." },
+      { "q": "Linux installation succeeds but 'Wenxiaozhou' tab doesn't appear", "a": "99% of the time, the jsaddons path is incorrect. Check ~/.lingxi-ai/install.log to see where publish.xml was written, then run 'find ~/.config ~/.kingsoft ~/.linglong -name publish.xml' to see what WPS is actually reading. Add the missing path to PUBLISH_DIRS in plugin/tools/post-install-linux.sh." },
+      { "q": "Kylin V10 early versions fail to start service via systemctl --user", "a": "Early V10 (based on Ubuntu 18.04, glibc 2.27) cannot run Node 22. The script falls back to 'node' in PATH; run 'sudo apt install nodejs' (18+) first, then rerun 'bash /opt/lingxi-ai/plugin/tools/post-install-linux.sh /opt/lingxi-ai'. Or upgrade to V10 SP1+." },
+      { "q": "How to install on LoongArch / Shenwei systems?", "a": "Use the .tar.gz package (no built-in node). Use 'sudo apt install nodejs' for Loongnix/Kylin or install from OEM repo for Shenwei. After installing, run 'bash install.sh'; post-install automatically uses the system node." },
+      { "q": "WPS installed from UOS App Store doesn't show 'Wenxiaozhou'", "a": "The UOS Linglong sandboxed WPS might not be able to access 127.0.0.1:3889. The script writes publish.xml into the sandbox directory, but if network isolation blocks local ports, you must use the official deb version of WPS installed outside the sandbox." }
+    ]
+  },
+  "changelog": {
+    "head_title": "Changelog · Wenxiaozhou",
+    "badge": "Changelog",
+    "h1": "Wenxiaozhou Release Notes",
+    "lead": "Grow with Wenxiaozhou. All released installers and source code are available on the GitHub Releases page.",
+    "latest": "Latest",
+    "beta": "Beta",
+    "releases": [
+      {
+        "version": "1.4.8",
+        "date": "2026-10-29",
+        "summary": "Fix local proxy port detection.",
+        "sections": [
+          {
+            "type": "fixes",
+            "items": [
+              "Improved compatibility with newer WPS versions.",
+              "Fixed Gemini model compatibility and request handling.",
+              "Fixed Codex authorization failing to fetch the model list."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Fixed the add-in getting stuck on startup when the local proxy uses a different port, and improved proxy connections during Windows local development."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.7",
+        "date": "2026-08-07",
+        "tag": "latest",
+        "summary": "A big multi-protocol expansion (native Google Gemini / Azure OpenAI / generic OpenAI Responses, 15 presets in total with OpenAI-compatible), two-way MCP (Server exposing WPS tools to external agents, and Client connecting to external MCP services), live reasoning echo, and a one-shot batch of 49 host tools (conditional formatting / data validation / charts / sparklines / tables / comment read-write / revision review / paragraph & page layout / animation / SmartArt / export PDF / save-as / print), bringing the host-tool count to 149.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Multi-protocol: added native Google Gemini, Azure OpenAI, and generic OpenAI Responses, for 15 presets in total with OpenAI-compatible aggregators — hook up several at once and switch anytime.",
+              "Two-way MCP: besides exposing WPS tools to external agents (Claude Code / Claude Desktop / Cursor), it can now act as a client connecting to external MCP services (local stdio / remote SSE), bringing their tools into the conversation under the mcp__service__tool namespace.",
+              "Spreadsheet: conditional formatting (color scales / data bars / icon sets / above-average / top-N / duplicates), data validation (dropdown / numeric range / custom), native charts, sparklines, tables, remove duplicates, text-to-columns, subtotals, advanced filter.",
+              "Writer: paragraph layout (alignment / indent / line spacing / spacing), headers & footers / page numbers, page setup, footnotes, captions, watermark, revision review (read + accept/reject per-item or all), style list, text boxes, merge documents.",
+              "Presentation: shape animation, align & distribute, SmartArt, sections, click actions / hyperlinks, audio & video insertion.",
+              "Cross-host: read & write comments, one-click export to PDF, save-as, print, document properties, view zoom & navigation.",
+              "Live reasoning echo: reasoning tokens now stream in arrival order instead of piling up after the answer; Gemini 2.5 recognized as reasoning models across the board.",
+              "AI revision mode: AI edits to a document can be applied as native Word tracked changes — accept / reject per-item or all at once, so you can see exactly what changed and roll it back.",
+              "Writer tools preserve document objects: replacing text now protects images / tables / equations from being wiped (read tools inject [Image N] / [Table N] placeholders; writes replace segment-by-segment).",
+              "New Writer tools: scan red / highlighted / shaded text (wps_find_colored_text) and batch-clear formatting (wps_clear_text_formatting).",
+              "Chat UI overhaul: a Claude-style timeline (node dots + per-segment tool / thinking durations, with the collapsed row showing that segment's total), always-visible per-message Copy / Fill-to-input buttons, right-aligned user messages, and a task list collapsed by default.",
+              "Selectable thinking effort: thinking effort is now chosen from a pop-up list (current item checked).",
+              "History in its own window: past conversations open in a standalone system window floating over the document, grouped by Today / Last 7 days / Older.",
+              "Dedicated image tab: image-generation progress moved to its own \"Image\" tab instead of taking over the chat area."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Fixed dropped text when delta.content streams as array parts (some gateways / Azure).",
+              "Fixed Azure OpenAI auth (api-key header + deployment + api-version) and Gemini auth (x-goog-api-key) passing through the local proxy.",
+              "Print / save-as / export and other side-effecting actions now confirm target and intent before running.",
+              "Rate-limit hits (rpm / 429) now show a friendly message explaining it's a rate limit rather than an error."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.6",
+        "date": "2026-07-21",
+        "summary": "A brand-new bilingual (Chinese / English) UI, AI formatting templates (contract / official / paper, etc.), comment-based proofreading and document compliance checks, AI edit-following, long-conversation compression and cross-conversation memory, new OpenAI / OpenRouter and Boogu local image channels, export to a new Word file, plus fixes for repeated cutout-model downloads, tool-call errors on thinking models like DeepSeek, garbled Chinese paste on macOS, the macOS model dropdown, small-screen input area, MCP and install stability.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Full internationalization: Simplified Chinese / English UI, following the system language by default and switchable under Settings → Language; covers Ribbon buttons, dialog titles and native dialogs, taking effect instantly (Ribbon labels after restarting WPS).",
+              "AI formatting templates: built-in Contract / Official document / Academic paper / Notice templates with a style preview and a full-page sample; custom templates (font, size, alignment for each heading level / body / quote); official & paper templates support Chinese chapter auto-numbering (一、/（一）/ 1.1), page margins and page-break-before on level-1 headings.",
+              "AI formatting scope: format only the selection or the whole document, each with its own preview & confirm.",
+              "AI edit-following: while the AI edits, Word scrolls to the change and Excel selects the edited range so you can see where it's working (can be turned off in Settings).",
+              "Comment-based proofreading: the new Proofread action marks typos / grammar / punctuation / logic issues as Word comments at their exact positions — click a comment to jump there.",
+              "Document compliance check: paste a checklist (tender requirements / contract review points / internal rules) and the AI reviews the whole document against it, marking findings as Word comments graded high / medium / low.",
+              "More image channels: added OpenAI official and OpenRouter image-generation channels; added a Boogu local image channel (self-hosted, no API key, generation only — no cutout), with a configurable default resolution tier (768 / 1K / 1080p / 2K / ultra) that derives width & height from the aspect ratio, and support for connecting to a self-hosted remote generation service.",
+              "Weak-model tool-call hint: when a model runs a tool but only restates the tool name instead of using its result, chat suggests switching to a stronger model.",
+              "Ribbon quick actions collapse into an action box: the fixed prompt sent by a Ribbon button folds into a single line in chat and expands to show the full prompt; history replays the same way.",
+              "Cheaper long conversations: very long chats automatically compress earlier turns into a rolling summary while keeping the most recent turns verbatim, avoiding runaway token growth and context-limit errors.",
+              "Cross-conversation memory: a new conversation automatically carries over preferences and conclusions from earlier conversations on the same document.",
+              "Local quick commands: deterministic commands like Save, Go to page N, Insert an N×M table, Undo / Redo run locally with zero latency and no token cost.",
+              "Export to a new Word file: save the formatted result as a new Word document without touching the current one.",
+              "Steadier outline-to-slides: the AI reviews and completes the outline (chapters / hierarchy) before generating the deck.",
+              "Replies stay in the UI language: fixed foreign models replying in English; the reasoning process is constrained too.",
+              "New MCP tool reveal_location: external AI can actively locate and highlight a region to guide the user's attention.",
+              "The task-progress panel can now collapse / expand; the model dropdown shows all models of tested providers by default, no manual refresh needed.",
+              "Background long tasks (proofreading / compliance, etc.) now share unified status tracking with visible progress / logs and resumable interruption; conversation persistence is now idle-throttled for smoother rapid sending in long chats."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Fixed the top model dropdown being unclickable on macOS.",
+              "Fixed the bottom chat input area being squeezed on small / short windows so the Stop button couldn't be clicked; the \"AI working\" banner is now a compact single line.",
+              "Fixed installs aborting because an old background service wasn't stopped, and the background watchdog wrongly deciding WPS wasn't running and stopping the service — which made the Ribbon entry disappear.",
+              "Fixed the MCP toggle showing unchanged after saving and reopening Settings; fixed external agents' MCP call logs not showing in the settings window.",
+              "Fixed the Ribbon quick-action \"action box\" being lost when replaying chat history (older records are restored from their prompt where possible).",
+              "Fixed the dev environment picking a Node binary from another platform when multiple platform runtimes coexist.",
+              "Fixed local cutout re-downloading the model every time: when the download was interrupted by a WebView request timeout / cancel, the partially downloaded model is no longer discarded — it finishes and caches in the background so the next cutout is instant.",
+              "Fixed thinking-mode models like DeepSeek failing with \"Thinking mode does not support this tool_choice\" when a tool call was forced (e.g. reading a spreadsheet) — it now automatically retries without the forced tool_choice.",
+              "Fixed garbled Chinese when pasting into the chat input box on macOS.",
+              "Fixed slow local image generation (e.g. Boogu) being wrongly treated as failed due to the WebView 60s timeout and retried repeatedly — it now generates asynchronously in the background with progress polling."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.4",
+        "date": "2026-07-14",
+        "summary": "All local caches migrated to SQLite, selectively enable Office apps, a service-status panel, AI operating WPS directly, plus tagged material library with multi-source collection, AI cutout and local offline cutout, dual-channel PDF parallel translation / summary / Q&A, staged PPT image generation, cloud skills, a token-usage panel, table support in AI formatting, and much more.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "All desktop local caches migrated to SQLite (via the bundled Node proxy): no longer bound by the browser's localStorage size / quota; conversations / history / token stats / materials / skills etc. are written through a server-side atomic merge across hosts — consistent and preserved across restarts.",
+              "New 'Service Status' settings page: view the ports and memory used by the local background service.",
+              "Selectively enable Word / Excel / PPT / PDF: tick them in settings to load Wenxiaozhou only in the chosen apps (takes effect after restarting WPS).",
+              "AI operation mode now defaults to 'operate WPS directly' (no per-step confirmation); the mode option was renamed, with the 'preview & confirm' mode still available.",
+              "Settings / material panels migrated to Ant Design Vue for a more consistent UI.",
+              "Material project name is now auto-summarized by the AI once per conversation: materials are auto-tagged with the project when acquired, and the manual 'current project' input was removed.",
+              "AI formatting now supports soft-line-break documents and markdown tables: a document split by Shift+Enter into a single Word paragraph can still be formatted line by line, and markdown tables are turned into native Word tables on replace.",
+              "Material library overhaul: materials now carry a project tag plus content tags; generated images are auto-tagged, and when building docs / PPTs the AI can search and reuse existing materials by tag instead of regenerating.",
+              "Import local images into the material library, with content tags auto-generated by a vision model; added text search and project filtering.",
+              "New web_fetch (scrape a web page's text) and web_image_search (find images online) tools that save web data / online images into the library as materials.",
+              "Staged PPT generation: the whole deck is inserted instantly with placeholder skeletons for preview, while images generate in the background and each page is swapped in once all its images are ready.",
+              "Cloud skills: load skills from a cloud (OSS) directory and enable the ones you want — no manual import needed.",
+              "New 'Token Usage' panel: per-model input / output / call counts, persisted, with a current-session subtotal.",
+              "Ribbon actions (expand / translate / polish, etc.) now factor in the document title, outline and surrounding context so output no longer drifts off-topic.",
+              "AI writes back to Word using native Word formatting (headings / lists / tables) directly, instead of emitting markdown and converting it.",
+              "Material library AI cutout / brush editing: one-click background removal, or brush over the subject to inpaint / cut it out (Codex-bridge channel).",
+              "Local offline cutout: a built-in neural matting model (onnxruntime + isnet) with hair-level soft edges, works with any model, fully offline; the model is fetched from the cloud on first use.",
+              "AI image generation can set the aspect ratio per run; generated images can be cropped into new materials; material preview supports scroll-to-zoom; the library now uses a masonry layout.",
+              "Document mind maps now render offline with markmap, with a Q&A panel for the map on the right, and can be turned into an image saved to the material library.",
+              "The model dropdown at the top of chat can collapse / expand by provider.",
+              "PDF parallel translation / full-text summary / PDF Q&A were reworked into a dual channel: digital PDFs extract page-numbered text (readable by any model, cheaper, accurate page references), while scanned PDFs fall back to whole-file multimodal.",
+              "PDF parallel translation is now a standalone window: pick source / target language and whole-doc / specific pages, preserve the original layout as much as possible, with a streaming original / translation comparison table."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "When a model doesn't support images / attachments, show an actionable message instead of the cryptic 'Unexpected item type in content'.",
+              "In 'preview & confirm' mode, fixed the confirm dialog being unclickable after it popped up (the document lock had disabled task-pane interaction), and made the dialog smaller.",
+              "Forwarding timeout is now idle-based: as long as SSE keeps returning it isn't a timeout, so reasoning models that think for a while / large gaps between chunks are no longer killed (timeouts are configurable via env vars).",
+              "Fixed an extra newline on manual paste on Windows; show a 'Pasting…' overlay when a manual paste is stuck.",
+              "Fixed the background service failing to start (a missing file) and WPS showing no plugin entry after install; the three-platform uninstallers now clean up residue (including the SQLite DB, the background launcher process, Linux linger, etc.).",
+              "Fixed the proxy crashing when started with an old Node that lacks node:sqlite.",
+              "Fixed AI formatting treating a whole document as one paragraph (only one heading) and 'only the title left after replace'.",
+              "Fixed mac Word ribbon icon / button display issues; improved PDF plugin callbacks and local-debug compatibility; fixed model-test filtering, provider expand state, local proxy forwarding and more.",
+              "Fixed input-box editing shortcuts (Ctrl+C/V etc.) being intercepted by the document on the left; translation replace now keeps line breaks and no longer sticks to the next paragraph; hardened the AddPicture null case in one-click PPT generation.",
+              "Fixed streaming chat breaking on gateways that strictly validate the request body and reject the stream_options field with a 400 (now retries without it).",
+              "A pass of bug hunting and fixes across runtime / providers / tools / installers.",
+              "Site download page: fixed SSR manifest state, platform detection and download links.",
+              "Fixed the PDF parallel-translation / Q&A dialog getting stuck because a page-number example in the prompt was mistaken for a required input; fixed some WPS versions not reading the PDF attachment so the AI 'couldn't see the PDF'.",
+              "Fixed the pending-tools area squeezing the chat transcript down to a few messages after a turn that called several tools.",
+              "Cutout / inpaint now show visible progress and can be cancelled; fixed the cutout result not being a transparent PNG."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.2",
+        "date": "2026-06-28",
+        "summary": "Change-history restore overhaul, true typewriter AI Format preview, and Linux Kylin install fix.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Change history entries are preserved after restore — UI shows a 'Restored' badge and hides the rollback button; full history survives TaskPane reload.",
+              "Smart turn title derivation: short prompts as-is; long or empty prompts derived from tool friendly names (e.g. 'Replace selection · Apply paragraph style'), original prompt as hover tooltip.",
+              "Multi-step undo restore: older turns now also use the no-close Application.Undo path (auto-counts steps), no longer closes and reopens the document every time.",
+              "AI Format preview is now a true typewriter: completed blocks stay static, only the active block at the bottom has a blinking cursor and types char-by-char — no more full-panel flashing.",
+              "Download page URL / filename / size are all driven from OSS manifest.json, so the site no longer lags behind actual releases."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Linux install fix on Kylin V10: post-install-linux.sh under set -u was expanding the systemd unit's positional args ($2) as undefined script variables and aborting, leaving the systemd unit incomplete and the service unable to start.",
+              "When restoring a middle turn, cascade-mark all newer turns as restored so their buttons disappear too (their backups are out-of-sync after the rollback).",
+              "Linux packaging adds a Docker container path so tar.gz / deb / rpm all build on Mac too; Apple Silicon uses --platform=linux/amd64 to force x64 builds.",
+              "Nuxt 3 dev server on Windows binds to IPv6 by default causing a blank localhost — forced to 127.0.0.1."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.1",
+        "date": "2026-06-27",
+        "summary": "A focused polish pass on ribbon UX, streaming previews, and cross-platform packaging.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Ribbon actions (polish / shrink / rewrite / expand / translate / continue / summary / mindmap) now share a unified preview dialog with before/after highlights, streaming output, and one-click rollback.",
+              "AI Format adds Contract / Tender / Government / Notice / Paper / Proposal / Resume presets; without a prompt it auto-detects the document type.",
+              "Image generation moved to a dedicated progress panel and auto-picks 16:9 / 9:16 / 1:1 based on context.",
+              "Default model ID is now a dropdown picker populated from the fetched model list.",
+              "Local proxy port falls forward through 3890-3909 when busy; the client rediscovers it via /healthz.",
+              "Chat retries up to 5 times on stream interruption.",
+              "New manual unlock button to clear edit-restricted state left over after undo.",
+              "Ribbon actions check the document is saved first, with OS-aware Ctrl+S / ⌘+S hints."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Polish / translate replacements preserve the original font, paragraph style, and line breaks; no more shrinking the heading that follows the selection.",
+              "Friendly message when no model is configured, replacing the misleading OAuth login error.",
+              "macOS installer switched to .pkg — right-click → Open to bypass Gatekeeper.",
+              "Linux packaging now supports a Docker container path so tar.gz / deb / rpm all build cleanly on macOS too."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.0",
+        "date": "2026-06-23",
+        "summary": "Added Linux permanent installation and upgraded the PPT/HTML templates, visual editing, theme presets, and in-app update experience.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Added Linux permanent installers across .deb, .rpm, and .tar.gz formats, covering Kylin, UOS, openEuler, Anolis, NeoKylin, and other distributions.",
+              "Expanded the HTML template system to 17 layouts, including cover, section, content, stat, feature-grid, timeline, bento, and freeform.",
+              "Added a visual HTML preview editor with drag, 8-direction resize, multi-select, alignment guides, 6px snapping, and coordinate hints.",
+              "Moved PPT style presets into a dedicated dialog with a visual theme grid and live preview.",
+              "Added in-app update prompts and a one-click update flow, with a visible 'New version' state in the top bar.",
+              "Added image generation support for toapis and codex-bridge providers, with clearer messages for common provider-side blocking errors."
+            ]
+          },
+          {
+            "type": "chores",
+            "items": [
+              "Improved local Ollama model recommendations so users can choose better local models for their workflow.",
+              "Improved Linux WPS add-in path detection, including WPS365 and UOS Linglong sandbox locations.",
+              "Improved permanent-install uninstall and upgrade flows to reduce service leftovers and missing plugin paths after upgrades."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.3.0",
+        "date": "2026-05-13",
+        "tag": "beta",
+        "summary": "Extended PDF host and multimodal support, rebuilt provider management and settings, and made the TaskPane layout better suited for daily use.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Added PDF host support so WPS PDF can share the same TaskPane capabilities as Writer, Spreadsheets, and Presentation.",
+              "Added PDF multimodal attachments for model understanding, rewriting, and summarization alongside image and document context.",
+              "Added reasoning-strength settings with automatic parameter mapping per provider.",
+              "Rebuilt multi-provider management for unified switching across Codex, Anthropic, OpenAI-compatible providers, and custom endpoints.",
+              "Moved settings into dialogs and redesigned the TaskPane around a more flexible layout."
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Added floating resize handles to improve dragging across narrow panels and different WPS hosts.",
+              "Improved recovery and retry behavior, and removed debug attributes to reduce accidental debug exposure in production."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.2.0",
+        "date": "2024-05-20",
+        "tag": "beta",
+        "summary": "Added support for Anthropic Claude 3 models and improved service stability on Linux.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Added support for Claude 3 Opus / Sonnet",
+              "Allowed custom model API proxies in settings"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Fixed WPS add-in detection when running WPS through Flatpak on Linux",
+              "Fixed conversation streams not retrying after network interruptions"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.1.2",
+        "date": "2024-04-15",
+        "tag": "beta",
+        "summary": "Improved PPT generation and style presets, adding five new templates.",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Added Timeline / Bento PPT layout templates",
+              "Added a keyboard shortcut to open the TaskPane (Win: Ctrl+Shift+A)"
+            ]
+          },
+          {
+            "type": "chores",
+            "items": [
+              "Refactored the internal tool-use scheduler for faster responses",
+              "Updated the built-in Node.js runtime to v22 LTS"
+            ]
+          }
+        ]
+      }
+    ],
+    "sections": {
+      "features": "🌟 Features",
+      "fixes": "🐛 Bug Fixes",
+      "chores": "🔧 Chores & Optimization"
+    }
+  }
+}

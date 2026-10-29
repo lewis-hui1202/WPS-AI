@@ -8,7 +8,7 @@
   if (typeof trace === "function") trace("generated.ribbonCallbacks.start", {"host":"wps","count":24});
   if (typeof bindAction === "function") bindAction("OnAction_openWpsAiPane", "openWpsAiPane");
   if (typeof bindImage === "function") bindImage("GetImage_openWpsAiPane", "openWpsAiPane");
-  if (typeof bindLabel === "function") bindLabel("GetLabel_openWpsAiPane", "打开灵犀AI");
+  if (typeof bindLabel === "function") bindLabel("GetLabel_openWpsAiPane", "打开文小舟");
   if (typeof bindAction === "function") bindAction("OnAction_quick_wps_helpWrite", "quick.wps.helpWrite");
   if (typeof bindImage === "function") bindImage("GetImage_quick_wps_helpWrite", "quick.wps.helpWrite");
   if (typeof bindLabel === "function") bindLabel("GetLabel_quick_wps_helpWrite", "帮我写");
@@ -78,8 +78,8 @@
   if (typeof bindAction === "function") bindAction("OnAction_quick_wps_suggest", "quick.wps.suggest");
   if (typeof bindImage === "function") bindImage("GetImage_quick_wps_suggest", "quick.wps.suggest");
   if (typeof bindLabel === "function") bindLabel("GetLabel_quick_wps_suggest", "智能推荐操作");
-  if (typeof bindLabel === "function") bindLabel("GetLabel_tab_wpsAiTab", "灵犀AI");
-  if (typeof bindLabel === "function") bindLabel("GetLabel_group_lingxiCore", "灵犀AI");
+  if (typeof bindLabel === "function") bindLabel("GetLabel_tab_wpsAiTab", "文小舟");
+  if (typeof bindLabel === "function") bindLabel("GetLabel_group_lingxiCore", "文小舟");
   if (typeof bindLabel === "function") bindLabel("GetLabel_group_lingxi_wps_writing", "写作");
   if (typeof bindLabel === "function") bindLabel("GetLabel_group_lingxi_wps_polish", "润色");
   if (typeof bindLabel === "function") bindLabel("GetLabel_group_lingxi_wps_translate", "翻译");

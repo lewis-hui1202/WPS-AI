@@ -4,6 +4,19 @@
 
 ## v1.4.8（开发中）
 
+### 名称与安装兼容
+
+- 产品显示名称改为「文小舟」。Windows 安装器保留原 AppId 和安装目录，macOS / Linux 保留原包标识、插件注册名及用户数据目录；旧版本可原位升级，配置与对话沿用。
+- 修复 Windows WPS 停靠面板顶部被功能区遮挡，导致模型选择和设置入口不可见的问题。
+- 规避 Windows WPS 文字创建停靠窗格后功能区无法点击的问题：主面板改用非模态浮窗，并移除浮窗多余的顶部留白。
+- 更新文小舟 logo：WPS 功能区与插件面板使用压缩 PNG，Windows 安装器和卸载入口使用多尺寸图标。
+
+### 启动修复
+
+- 修复本地代理切换端口后，插件可能一直显示「插件启动中」的问题；Windows 本地调试会使用实际代理端口。
+- 修复 Gemini 3 系列使用工具后续轮报 `Function call is missing a thought_signature`：按原顺序回传模型返回的 parts 与签名。
+- 修复 PPT 读取时文字按形状创建顺序返回、与页面视觉顺序不一致；完成报告明确成功时同步遗漏的任务进度状态。
+
 ### 多协议供应商（加强聊天回显适配）
 
 - **新增 Google Gemini 原生协议**（`js/providers/gemini.js`）：`:streamGenerateContent?alt=sse`，解析 `parts[].text`（正文）/ `parts[].thought`（思考）/ `parts[].functionCall`（工具）；鉴权 `x-goog-api-key`；消息 `contents(user/model)` + `systemInstruction`；functionResponse 回填进 user 轮（Gemini 强制 user/model 交替）；schema 过 sanitize 只留 OpenAPI 子集

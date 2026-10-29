@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-    <title>灵犀AI</title>
+    <title>文小舟</title>
     <organization>com.lingxi-ai</organization>
 
     <!-- 安装向导界面文案 -->

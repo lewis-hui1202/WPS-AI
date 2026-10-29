@@ -2,12 +2,12 @@
 name: wps-ai
 description: "通过 WPS-AI MCP 服务操控 WPS Office 文档——读取、写入、格式化、公文排版。在 Windows Hermes 上配置后，可从 NAS 远程操控 WPS 处理文档。"
 version: 1.0.0
-author: "天启造价 × 灵犀AI"
+author: "天启造价 × 文小舟"
 ---
 
 # WPS-AI Hermes Skill
 
-本技能将 [灵犀AI WPS 插件](https://github.com/lewis-hui1202/WPS-AI) 的 MCP 服务接入 Hermes Agent，实现远程操控 WPS Office 文档。
+本技能将 [文小舟 WPS 插件](https://github.com/lewis-hui1202/WPS-AI) 的 MCP 服务接入 Hermes Agent，实现远程操控 WPS Office 文档。
 
 ## 架构
 
@@ -22,7 +22,7 @@ Hermes Agent (NAS/本地)
 
 ## 安装
 
-### 1. 安装灵犀AI WPS 插件
+### 1. 安装文小舟 WPS 插件
 
 从 https://github.com/lewis-hui1202/WPS-AI/releases 下载安装包，或：
 
@@ -87,7 +87,7 @@ mcp:
 
 ### 公文排版 (政府文档)
 
-灵犀AI 没有 “一键公文预设” 参数；公文格式通过“插入文本 + 分别设置字符/段落格式”组合完成。示例（Hermes 调用）：
+文小舟 没有 “一键公文预设” 参数；公文格式通过“插入文本 + 分别设置字符/段落格式”组合完成。示例（Hermes 调用）：
 
 ```python
 # 1) 插入标题文本（不带格式）

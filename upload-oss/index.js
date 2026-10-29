@@ -195,7 +195,7 @@ async function main() {
     process.exit(1)
   }
 
-  console.log(`\n=== 灵犀AI 安装包上传 (v${version})${opts.dryRun ? ' [dry-run]' : ''}${opts.onlySiteManifest ? ' [manifest-downloads-only]' : ''} ===\n`)
+  console.log(`\n=== 文小舟 安装包上传 (v${version})${opts.dryRun ? ' [dry-run]' : ''}${opts.onlySiteManifest ? ' [manifest-downloads-only]' : ''} ===\n`)
 
   // ---- 0. 版本号同步：release.ts → package.json / manifest.json / iss ----
   if (opts.checkVersionOnly) {

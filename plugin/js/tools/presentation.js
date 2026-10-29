@@ -121,7 +121,7 @@
           : null
       });
     }
-    return out;
+    return global.WpsAiPresentationOrder?.sort(out) || out;
   }
 
   // 读某页演讲者备注（从 wpp_get_notes 抽出，供 includeNotes 复用）。

@@ -8,7 +8,7 @@ const ROOT = path.join(__dirname, "..");
 test("P2-6 导出 Word：proxy 端点 + writer 暴露 blocksToHtml + 预览导出按钮接线", () => {
   const proxy = fs.readFileSync(path.join(ROOT, "tools", "proxy-server.js"), "utf8");
   assert.match(proxy, /"\/export-doc"/);
-  assert.match(proxy, /灵犀AI导出/);
+  assert.match(proxy, /文小舟导出/);
   assert.match(proxy, /urn:schemas-microsoft-com:office:word/); // Word 兼容 HTML 头
   const writer = fs.readFileSync(path.join(ROOT, "js", "hosts", "writer.js"), "utf8");
   assert.match(writer, /blocksToHtml,\s*\/\/ 导出为新 Word 文件/);

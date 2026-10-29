@@ -810,7 +810,7 @@ function setCorsHeaders(res) {
     "Access-Control-Allow-Headers",
     "Content-Type, Authorization, Accept, chatgpt-account-id, OpenAI-Beta, originator, client_version, x-api-key, anthropic-version, anthropic-dangerous-direct-browser-access, anthropic-beta"
   );
-  res.setHeader("Access-Control-Expose-Headers", "Content-Type, X-Request-Id");
+  res.setHeader("Access-Control-Expose-Headers", "Content-Type, X-Request-Id, X-Lingxi-Service");
   res.setHeader("Access-Control-Max-Age", "86400");
 }
 
@@ -2149,6 +2149,24 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  if (pathname === "/ribbon-position" && method === "GET") {
+    const { readRibbonPosition } = require("./ribbon-position");
+    sendJson(res, 200, { ok: true, position: readRibbonPosition() });
+    return;
+  }
+  if (pathname === "/ribbon-position" && method === "POST") {
+    try {
+      const json = JSON.parse((await readBody(req)).toString("utf8") || "{}");
+      if (!["before-home", "after-home", "end"].includes(json.position)) {
+        sendJson(res, 400, { ok: false, error: "无效的 Ribbon 位置" });
+        return;
+      }
+      const { writeRibbonPosition } = require("./ribbon-position");
+      sendJson(res, 200, { ok: true, position: writeRibbonPosition(json.position) });
+    } catch (e) { sendJson(res, 500, { ok: false, error: e.message }); }
+    return;
+  }
+
   // 界面语言侧车文件：静态服务按它决定给 WPS 发中文还是英文 ribbon.xml
   // （部分 WPS 不支持 getLabel 动态回调，label 必须在 xml 里就是目标语言）。
   // 固定路径 ~/.lingxi-ai/ui-lang.txt——static/proxy 进程 cwd 不同也能对上。
@@ -2181,7 +2199,7 @@ const server = http.createServer(async (req, res) => {
       const json = JSON.parse(body.toString("utf8") || "{}");
       const html = String(json.html || "");
       if (!html.trim()) { sendJson(res, 400, { ok: false, error: "缺少 html 内容" }); return; }
-      const safeName = String(json.fileName || "灵犀AI导出").replace(/[\\/:*?"<>|]/g, "_").slice(0, 60) || "灵犀AI导出";
+      const safeName = String(json.fileName || "文小舟导出").replace(/[\\/:*?"<>|]/g, "_").slice(0, 60) || "文小舟导出";
       const dir = path.join(os.homedir(), "Documents", "灵犀AI导出");
       fs.mkdirSync(dir, { recursive: true });
       const stamp = new Date().toISOString().replace(/[-:.TZ]/g, "").slice(0, 14);

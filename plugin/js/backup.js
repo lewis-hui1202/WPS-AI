@@ -206,7 +206,7 @@
     try {
       const ur = app.UndoRecord;
       if (ur && typeof ur.StartCustomRecord === "function") {
-        ur.StartCustomRecord(name || "灵犀AI 操作");
+        ur.StartCustomRecord(name || "文小舟 操作");
         undoRecordOpen = true;
         return true;
       }
@@ -275,7 +275,7 @@
 
     // 2. 开 UndoRecord(在 Save 之前,这样 Save 不会进 undo 组里 — 不影响)
     //    这一步是"内容层回退"的关键。开成功就标记 undoGroup=true,回退时优先走 Undo。
-    const undoGroup = tryStartUndoGroup(app, `灵犀AI - ${new Date().toISOString()}`);
+    const undoGroup = tryStartUndoGroup(app, `文小舟 - ${new Date().toISOString()}`);
 
     // 3. 补/取文档身份 UUID（写进 CustomDocumentProperties）。
     //    在 Save 之前 assign，Save 会顺手把 property 持久化到 .docx / .xlsx / .pptx 里，

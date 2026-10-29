@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI Linux 安装后脚本(用户上下文)
+# 文小舟 Linux 安装后脚本(用户上下文)
 #
 # 调用入口:
 #   - tar.gz 绿色包:   install.sh 解压后直接 bash 调
@@ -158,6 +158,7 @@ fi
 # ---- 4. 拷服务脚本 ----
 mkdir -p "$TARGET/tools"
 cp "$INSTALL_DIR/plugin/tools/serve-permanent.js" "$TARGET/tools/serve-permanent.js"
+cp "$INSTALL_DIR/plugin/tools/ribbon-position.js" "$TARGET/tools/ribbon-position.js"
 cp "$INSTALL_DIR/plugin/tools/proxy-server.js"    "$TARGET/tools/proxy-server.js"
 cp "$INSTALL_DIR/plugin/tools/mcp-server.js"      "$TARGET/tools/mcp-server.js"
 cp "$INSTALL_DIR/plugin/tools/zip-extract.js"     "$TARGET/tools/zip-extract.js"
@@ -198,7 +199,7 @@ write_publish_merged() {
 }
 
 # WPS for Linux 在不同发行版/分发渠道下的 jsaddons 路径分布很散,挨个写一遍。
-# 写多了不会出错(WPS 启动时只读它认得的那个);写少了「灵犀AI」标签就不显示。
+# 写多了不会出错(WPS 启动时只读它认得的那个);写少了「文小舟」标签就不显示。
 # 现在不再判断父目录是否存在 —— WPS 首次启动前父目录可能不存在,但我们提前 mkdir
 # 让 WPS 启动时就能读到 publish.xml。
 PUBLISH_DIRS=(
@@ -263,7 +264,7 @@ if [ "$USE_SYSTEMD" = "1" ]; then
   # $TARGET / $NODE_BIN 是当前脚本里的变量，正常展开。
   cat > "$UNIT" <<EOF
 [Unit]
-Description=Lingxi AI WPS plugin background server
+Description=Wenxiaozhou WPS plugin background server
 After=default.target
 
 [Service]
@@ -301,7 +302,7 @@ else
   cat > "$DESKTOP" <<EOF
 [Desktop Entry]
 Type=Application
-Name=Lingxi AI Server
+Name=Wenxiaozhou Server
 Exec=$TARGET/tools/service-watchdog.sh --node $NODE_BIN --script $TARGET/tools/serve-permanent.js --root $TARGET --log $TARGET/server.log --static-port 3889 --proxy-port 3890 --idle-seconds 30 --start-now
 X-GNOME-Autostart-enabled=true
 NoDisplay=true

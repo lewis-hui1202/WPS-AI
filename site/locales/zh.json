@@ -1,0 +1,546 @@
+{
+  "nav": {
+    "home": "首页",
+    "download": "下载",
+    "docs": "文档",
+    "changelog": "更新日志",
+    "github": "GitHub 开源",
+    "brand_sub": "WPS Office AI 助手"
+  },
+  "footer": {
+    "copy": "© {year} 文小舟 · 由 Claude vibe coding 完成"
+  },
+  "index": {
+    "rename_notice": "品牌更名提醒：为避免与 WPS 官方插件名称混淆，本插件已由“灵犀AI”更名为“文小舟”。",
+    "badge_released": "v{version} · 已发布",
+    "head_title": "文小舟 · WPS Office 多宿主 AI 助手",
+    "h1_1": "为 WPS Office 而生的",
+    "h1_2": "AI 助手插件",
+    "lead": "一个 TaskPane 同时跑在 WPS 文字 / 表格 / 演示 / PDF 四端，挂多家大模型（Codex / OpenAI / Anthropic / Gemini / Azure / OpenAI 兼容，共 15 家预设）+ MCP 双向，AI 通过 149 个工具直接读写文档 —— 条件格式、图表、批注审阅、PPT 生成、PDF 翻译，对话里一句话搞定。",
+    "btn_download": "前往下载",
+    "alt_link_prefix": "更多版本：",
+    "alt_link_github": "GitHub Releases",
+    "window_title": "WPS 文字 · 文小舟",
+    "msg_user": "把这段总结成 3 个要点",
+    "msg_ai_name": "文小舟",
+    "msg_ai_status": "已读取选区，正在调用 {tool} 工具直接写回文档…",
+    "composer_placeholder": "问点什么 / {'@'} 选择上下文",
+    "features_title": "核心能力",
+    "features": [
+      { "title": "四端通用 TaskPane", "desc": "文字 / 表格 / 演示 / PDF 共用同一面板，设置与 PPT 风格预设独立成 WPS dialog 窗口。" },
+      { "title": "多协议 · 多家 AI 同挂", "desc": "Codex / Anthropic / Gemini 原生 / Azure OpenAI / 通用 OpenAI Responses + OpenAI 兼容共 15 家预设，还能通过 MCP 双向连外部工具，按 provider 分组下拉随时切。" },
+      { "title": "149 个工具直写文档", "desc": "从读写文字到条件格式 / 数据验证 / 图表 / 智能表 / 迷你图、批注读写与修订审阅、段落排版 / 页眉页脚 / 页面设置、动画 / SmartArt、导出 PDF / 另存 / 打印，AI 用工具直接操作。" },
+      { "title": "多模态 + 实时思考", "desc": "图像、PDF 当多模态附件；思考(reasoning)按到达顺序实时回显，按 provider 自动映射参数。" },
+      { "title": "PPT 主题与图表", "desc": "50+ 套设计色板 + 17 套 HTML 布局，AI 直接生成 / 改写主题、图表与版式，可视化编辑器拖拽微调。" },
+      { "title": "开箱即用 · 跨平台", "desc": "安装包内置便携 Node 运行时，跨 Windows / macOS / Linux，覆盖银河麒麟、统信 UOS 等国产系统。" }
+    ],
+    "community": {
+      "title": "遇到问题？加入粉丝群反馈",
+      "lead": "扫右侧二维码关注公众号，回复“ai”即可获取粉丝群链接，和其他用户一起交流、反馈 Bug。",
+      "step1": "微信扫描右侧二维码，关注公众号",
+      "step2": "在公众号对话框回复“ai”",
+      "step3": "获取粉丝群链接，进群反馈问题 & 交流",
+      "qr_label": "微信扫码关注公众号"
+    },
+    "stats": [
+      { "num": "4", "label": "宿主全覆盖", "sub": "文字 / 表格 / 演示 / PDF" },
+      { "num": "15+", "label": "AI 供应商预设", "sub": "Codex / Claude / Gemini / Azure / DeepSeek…" },
+      { "num": "149", "label": "可调用工具", "sub": "读写 / 格式 / 图表 / 审阅 / 导出…" },
+      { "num": "100%", "label": "AI vibe coding", "sub": "by Claude · 零手敲代码" }
+    ]
+  },
+  "download": {
+    "head_title": "下载 · 文小舟",
+    "badge_download": "v{version} · 立即下载",
+    "h1": "下载文小舟",
+    "lead": "选择你的系统平台，一键下载安装包。内置 Node 运行时，无需额外配置。",
+    "pending_badge": "敬请期待",
+    "cta_size_note": "内置 Node 运行时，免单独安装",
+    "btn_download": "立即下载",
+    "btn_disabled": "敬请期待",
+    "linux_title": "按发行版选包",
+    "linux_sub": "覆盖银河麒麟 / 统信 UOS / openEuler / Anolis / Deepin / 中标麒麟等国产系统",
+    "arch_x86": "x86_64",
+    "arch_arm": "aarch64 (鲲鹏/飞腾)",
+    "linux_foot_1": "国产 CPU(龙芯 loongarch64 / 申威 sw_64 / 旧龙芯 mips64el) 请用 tar.gz 包，系统需先装 Node 18+",
+    "linux_foot_2": "· 全部架构包见",
+    "install_title": "安装步骤",
+    "sys_req_title": "系统要求",
+    "more_docs": "完整安装文档",
+    "distros_title": "已覆盖发行版",
+    "distros_desc_1": "下表是设计上验证过的目标发行版。其他 Linux 发行版理论上 .tar.gz 通用包都能装，碰到问题在 ",
+    "distros_desc_2": " 反馈。",
+    "win_steps": [
+      "先临时关掉杀软实时防护",
+      "双击 setup.exe 安装",
+      "完全退出 WPS 后重新打开",
+      "Ribbon 出现「文小舟」标签即成功"
+    ],
+    "mac_steps": [
+      "右键 .pkg → 打开（绕过 Gatekeeper）",
+      "输入系统密码授权安装",
+      "完全退出 WPS 后重新打开",
+      "WPS 加载项面板出现「文小舟」即成功"
+    ],
+    "linux_steps": [
+      "按发行版选 .deb / .rpm / .tar.gz",
+      "一行命令安装（apt / dnf / tar）",
+      "安装器自动写 publish.xml + 起 systemd 用户服务",
+      "完全退出 WPS 重开，左上「文小舟」标签即成功"
+    ],
+    "win_req": [
+      "Windows 10 / 11 (x64)",
+      "WPS Office 12.x+",
+      "内置便携 Node 22.x，无需自行安装"
+    ],
+    "mac_req": [
+      "macOS 10.15 Catalina+",
+      "Intel + Apple Silicon",
+      "WPS Office 5.x+",
+      "内置 darwin-x64 + arm64 Node"
+    ],
+    "linux_req": [
+      "x86_64 / aarch64 主流国产 + 海外发行版",
+      "WPS for Linux 11.x+ (国内专业版 / 个人版均可)",
+      "systemd --user（主流发行版默认启用，服务自动保活）",
+      "内置便携 Node 22.x · 国产 CPU(龙芯/申威) 自动退到系统 Node"
+    ]
+  },
+  "docs": {
+    "head_title": "文档 · 文小舟 v{version}",
+    "badge": "安装文档 · v{version}",
+    "h1": "文小舟 插件安装指南",
+    "lead": "覆盖 WPS 文字 / 表格 / 演示 / PDF 四端的 Beta 版安装手册。Windows / macOS / Linux 步骤分开列出,Linux 端覆盖银河麒麟、统信 UOS、openEuler、Anolis、中标麒麟等国产系统。",
+    "toc_title": "目录",
+    "sections": {
+      "overview": "两种安装模式",
+      "windows": "Windows 永久安装",
+      "macos": "macOS 永久安装",
+      "linux": "Linux 永久安装",
+      "requirements": "前置环境",
+      "debug": "开发调试模式",
+      "faq": "常见问题"
+    },
+    "modes": [
+      { "name": "永久安装", "tag": "推荐", "suit": "长期使用", "desc": "一次到位给三个 WPS 应用（文字 / 表格 / 演示）注册插件，后台服务开机自启，不用再开终端。" },
+      { "name": "开发调试模式", "tag": "临时", "suit": "临时试用、二次开发", "desc": "用 npm run dev:*，每次只能给一个宿主用，关掉脚本插件就消失。" }
+    ],
+    "mode_suit_prefix": "适合 · ",
+    "callout_overview": "推荐先看「永久安装」一节。如果只是试用一次，跳到「开发调试模式」。",
+    "recommend_gui": "推荐方式：图形化安装器（傻瓜式）",
+    "recommend_pkg": "推荐方式：图形化安装器（pkg，傻瓜式）",
+    "win_steps": [
+      "下载 {file}（约 30MB，内置 Node 运行时）。",
+      "双击运行 setup.exe，按向导默认装到 C:\\Program Files\\LingxiAI（无需管理员权限）。",
+      "安装器最后一步会自动生成宿主变体到 %USERPROFILE%\\.lingxi-ai\\、写 publish.xml、注册登录自启、起后台服务。",
+      "完全退出 WPS（任务栏右下角右键退出），重开后顶部出现「文小舟」标签即成功。",
+      "日志位于 %USERPROFILE%\\.lingxi-ai\\server.log。"
+    ],
+    "mac_steps": [
+      "下载 {file}（约 35MB，内置 darwin-x64 + arm64 Node）。",
+      "右键 .pkg → 打开。未签名版本会被 Gatekeeper 拦，点警告对话框里的「打开」即可绕过。",
+      "按向导一路下一步，装到 /Library/Application Support/LingxiAI/（输一次系统密码）。",
+      "postinstall 自动按 CPU 架构选 Node、生成宿主变体到 ~/.lingxi-ai/、写 publish.xml、写 LaunchAgent。",
+      "完全退出 WPS → 重开任意 WPS 应用，顶部出现「文小舟」即成功。",
+      "日志：~/.lingxi-ai/install.log（安装过程）+ ~/.lingxi-ai/server.log（后台服务）。"
+    ],
+    "info_win_uninstall_title": "卸载",
+    "info_win_uninstall_desc": "开始菜单 → 「文小舟」 → 「卸载文小舟」。会自动停服务、清 publish.xml、清 ~/.lingxi-ai、移除自启项。",
+    "info_win_upgrade_title": "升级",
+    "info_win_upgrade_desc": "下新版 setup.exe 双击运行即可，Inno Setup 会原地替换。provider 配置 / OAuth Token / 模型选择在 localStorage，重装不丢。",
+    "info_mac_uninstall_title": "卸载（一键）",
+    "info_mac_uninstall_desc": "Spotlight 搜「文小舟 卸载」或在「应用程序」双击“文小舟 卸载.app”→ 输系统密码即可。脚本会清掉 LaunchAgent / publish.xml / 安装目录 / pkgutil receipt。",
+    "info_mac_upgrade_title": "升级",
+    "info_mac_upgrade_desc": "下载新版 .pkg → 同样右键打开。preinstall 自动停旧服务，postinstall 重新写 publish.xml 并重启 LaunchAgent。",
+    "linux_intro": "产出三种包格式,覆盖主流国产 + 海外发行版 + 国产 CPU(龙芯/申威/RISC-V)。按下表选包,装好步骤一致。",
+    "linux_formats": [
+      { "target": "Ubuntu · Debian · Deepin · 统信 UOS · 银河麒麟桌面版 · openKylin" },
+      { "target": "openEuler · Anolis OS · 银河麒麟服务器 · 中标麒麟 · Fedora · RHEL · UOS Server" },
+      { "target": "所有发行版通用 · 龙芯 / 申威 / RISC-V 等国产 CPU(需自备系统 Node 18+)" }
+    ],
+    "linux_uninstall_label": "卸载:",
+    "linux_install_happens": "安装时发生了什么",
+    "linux_steps": [
+      "按发行版选包：deb(Ubuntu/UOS/麒麟桌面)、rpm(openEuler/麒麟服务器/中标麒麟)、tar.gz(通用兜底)。",
+      "一行命令安装（apt / dnf / tar）。维护者脚本会自动找到真实登录用户,切过去跑用户态配置。",
+      "post-install 自动按 uname -m 选 Node、生成宿主变体到 ~/.lingxi-ai/、写 publish.xml 到 8 个已知 WPS jsaddons 路径(主流 + 国产 + snap + flatpak + UOS 玲珑沙箱)。",
+      "写入 ~/.config/systemd/user/lingxi-ai.service 并 enable + start;loginctl enable-linger 保证用户没登录时也能跑。systemd 不可用时退到 ~/.config/autostart/.desktop。",
+      "完全退出 WPS → 重开任意 WPS 应用,顶部出现「文小舟」即成功。",
+      "日志：~/.lingxi-ai/install.log(安装过程) + journalctl --user -u lingxi-ai(后台服务)。"
+    ],
+    "linux_info_arch_title": "架构覆盖",
+    "linux_info_arch_desc": "x86_64(主流) + aarch64(鲲鹏 920 / 飞腾 D2000 / 海光)有内置 Node 22。loongarch64(龙芯) / sw_64(申威) / mips64el(旧龙芯)用 .tar.gz 包,系统需先装 Node 18+。",
+    "linux_info_upg_title": "升级",
+    "linux_info_upg_desc": "sudo dpkg -i ./新版.deb 或 sudo dnf install ./新版.rpm 原地覆盖。postinst 自动停旧 systemd 单元,装完重启。provider 配置 / OAuth Token 在 localStorage,重装不丢。",
+    "linux_info_verify_title": "验证",
+    "req_col1": "必装项",
+    "req_col2": "GUI 安装器",
+    "req_col3": "手动 / 调试",
+    "req_col4": "说明",
+    "req_builtin": "已内置",
+    "reqs": [
+      { "item": "WPS Office", "note": "国内 / 国际版均可。Windows 12.x+，macOS 5.x+，Linux WPS 11.x+(国内专业版/个人版均可)。" },
+      { "item": "Node.js LTS", "note": "GUI 安装包内置便携 Node(x86_64 / aarch64)。手动方式或国产 CPU 需 18+ / 20+。" },
+      { "item": "systemd --user", "note": "仅 Linux 永久模式需要。主流国产/海外发行版默认启用;CentOS 7/容器内会自动退到 XDG autostart。" },
+      { "item": "wpsjs CLI", "note": "仅调试模式需要，脚本会自动 npm install -g wpsjs。" }
+    ],
+    "debug_intro": "适合只想本地跑一下 / 改代码看效果的场景。每次只能给一个宿主用。",
+    "debug_win": "Windows 调试模式",
+    "debug_win_steps": [
+      "解压 {file} 到任意目录。",
+      "进入 plugin/ 目录，双击 install-windows.bat。脚本检查 Node、全局装 wpsjs、跑 npm install。",
+      "保留窗口，双击对应应用启动脚本：start-wps.bat / start-et.bat / start-wpp.bat。",
+      "启动脚本同时拉起本地 CORS 代理（3890）+ wpsjs 调试服务（3889），WPS 客户端会被自动唤起。",
+      "在 WPS 顶部功能区找到「文小舟」分组，点击「打开文小舟」即可。"
+    ],
+    "debug_mac": "macOS 调试模式",
+    "debug_mac_steps": [
+      "解压到任意目录，例如 ~/lingxi-ai/。",
+      "终端 cd 进 plugin/ 目录。",
+      "跑 bash install-mac.sh（用 bash 调用，绕过 Gatekeeper quarantine）。",
+      "完全退出 WPS。",
+      "启动对应应用：bash start-wps.sh / start-et.sh / start-wpp.sh。",
+      "重开 WPS。看不到分组时进「加载项」启用 lingxi-ai。"
+    ],
+    "debug_linux": "Linux 调试模式",
+    "debug_linux_steps": [
+      "解压 .tar.gz 包到任意目录,或 git clone 项目。",
+      "cd 进 plugin/ 目录,装系统 Node 18+(若没有内置 Node)。",
+      "npm install 装依赖。",
+      "npm run dev:wps / dev:et / dev:wpp / dev:pdf 启对应宿主的开发服务。",
+      "WPS 客户端会被 wpsjs 自动唤起,加载项面板出现「文小舟」即成功。",
+      "改代码 → 直接刷 WPS 加载项面板即可,无需重启脚本。"
+    ],
+    "faqs": [
+      { "q": "插件加载后图表 / 视觉模板报「代理服务器返回 404」", "a": "代理服务器是旧进程（启动时还没有 /upload-image 路由）。调试模式按 Ctrl-C 重启脚本；永久模式重跑一遍 install 脚本即可。" },
+      { "q": "WPS 看不到「文小舟」分组", "a": "永久模式：检查计划任务 / LaunchAgent 是否注册，看 server.log 是否报错。调试模式：完全退出 WPS（macOS 注意 Dock 右键退出）再重启。" },
+      { "q": "3889 / 3890 端口被占用", "a": "调试模式可在 package.json dev 命令加 --port，或设环境变量 PROXY_PORT。永久模式用 LINGXI_STATIC_PORT / PROXY_PORT 启动。" },
+      { "q": "能否完全离线安装", "a": "可以。先在联网机器 npm install -g wpsjs，再把 wpsjs 与 plugin/node_modules 一起拷到目标机相同位置。" },
+      { "q": "macOS 报「Main resource content verification failed」", "a": "WKWebView 缓存了旧资源。停服务 → 清 ~/Library/Containers/com.kingsoft.wpsoffice.mac[.global]/Data/Library/Caches/* → 重启服务即可。" },
+      { "q": "macOS 直接 ./xxx.sh 报 operation not permitted", "a": "zip 解压被打了 com.apple.quarantine。两条出路：bash xxx.sh，或 xattr -dr com.apple.quarantine .。" },
+      { "q": "360 安全卫士拦截 setup.exe 安装失败", "a": "建议安装前暂时退出 360，装完再启 360 并把安装目录加白；或在 360 操作记录里把所有 LingxiAI 拦截条目「始终允许」。" },
+      { "q": "Linux 装完看不到「文小舟」标签", "a": "99% 是 jsaddons 路径找不对。先看 ~/.lingxi-ai/install.log 里 publish.xml 写到了哪几条;再 find ~/.config ~/.kingsoft ~/.linglong -name publish.xml 看 WPS 实际读哪条。把缺的路径加到 plugin/tools/post-install-linux.sh 的 PUBLISH_DIRS 数组。" },
+      { "q": "银河麒麟 V10 早期版 systemctl --user 起服务失败", "a": "早期 V10 基于 Ubuntu 18.04,glibc 2.27,Node 22 跑不起来。脚本会自动退到系统 PATH 上的 node;先 sudo apt install nodejs(18+) 再重跑 bash /opt/lingxi-ai/plugin/tools/post-install-linux.sh /opt/lingxi-ai。或升级到 V10 SP1+。" },
+      { "q": "龙芯/申威 系统怎么装", "a": "用 .tar.gz 包(没有内置 node)。Loongnix / 龙芯麒麟用 sudo apt install nodejs 装系统 Node;申威系统从 OEM 软件源装。装完跑 bash install.sh,post-install 会自动用系统 node。" },
+      { "q": "UOS 应用商店里装的 WPS 没出现「文小舟」", "a": "UOS 玲珑(linglong)沙箱化的 WPS 可能没法访问 127.0.0.1:3889。脚本已经往沙箱目录写了 publish.xml,但如果沙箱网络隔离阻止本地端口,只能改用沙箱外装的官方 deb 版 WPS。" }
+    ]
+  },
+  "changelog": {
+    "head_title": "更新日志 · 文小舟",
+    "badge": "更新日志",
+    "h1": "文小舟 更新记录",
+    "lead": "跟随文小舟 一起成长。所有发布的安装包及源码均可在 GitHub Releases 页面查看与下载。",
+    "latest": "最新",
+    "beta": "公测版",
+    "releases": [
+      {
+        "version": "1.4.8",
+        "date": "2026-10-29",
+        "rename_fixes": [
+          "修复 WPS 高版本兼容性问题。",
+          "修复 Gemini 模型兼容性问题。",
+          "修复 Codex 授权后获取模型列表失败的问题。"
+        ],
+        "summary": "修复本地代理端口探测问题。",
+        "sections": [
+          {
+            "type": "fixes",
+            "items": [
+              "修复本地代理切换端口后插件可能一直显示「插件启动中」的问题，并改善 Windows 本地调试时的代理连接。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.7",
+        "date": "2026-08-07",
+        "tag": "latest",
+        "summary": "多协议供应商大扩充（Google Gemini 原生 / Azure OpenAI / 通用 OpenAI Responses，加上 OpenAI 兼容共 15 家预设）、MCP 双向（既做 Server 暴露 WPS 工具给外部 agent，也做 Client 连接外部 MCP 服务）、思考实时回显，以及一次性补齐 49 个宿主工具（条件格式 / 数据验证 / 图表 / 迷你图 / 智能表 / 批注读写 / 修订审阅 / 段落排版 / 页眉页脚 / 页面设置 / 动画 / SmartArt / 导出 PDF / 另存 / 打印等），宿主工具总数达 149。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "多协议接入：新增 Google Gemini 原生、Azure OpenAI、通用 OpenAI Responses 三种协议，加上 OpenAI 兼容聚合共 15 家预设，可同时挂多家、下拉随时切换。",
+              "MCP 双向：除了把 WPS 工具暴露给外部 agent（Claude Code / Claude Desktop / Cursor），还能作为客户端连接外部 MCP 服务（本地 stdio / 远程 SSE），把它们的工具纳入对话，命名空间 mcp__服务__工具。",
+              "表格能力扩充：条件格式（色阶 / 数据条 / 图标集 / 高于均值 / 前N / 重复值）、数据验证（下拉 / 数值范围 / 自定义）、原生图表、迷你图、智能表、删除重复、文本分列、分类汇总、高级筛选。",
+              "文字能力扩充：段落排版（对齐 / 缩进 / 行距 / 段前段后）、页眉页脚 / 页码、页面设置、脚注尾注、题注、文字水印、修订审阅（读取 + 逐条或全部接受 / 拒绝）、样式清单、文本框、合并文档。",
+              "演示能力扩充：形状动画、形状对齐与分布、SmartArt、幻灯片分节、形状点击动作 / 超链接、音视频插入。",
+              "三端通用：批注读写、一键导出 PDF、另存为、打印、文档属性读写、视图缩放与定位。",
+              "思考实时回显：reasoning token 改为按到达顺序实时显示，不再攒到答案之后；Gemini 2.5 全系识别为思考模型。",
+              "AI 修订模式：AI 对文档的改动可走 Word 原生修订留痕，逐条或一键全部接受 / 拒绝，改哪看得清、可回撤。",
+              "写工具保护文档对象：替换文字时自动保护图片 / 表格 / 公式等对象不被误删（读取时注入 [图片N] / [表格N] 占位符，写入按分区替换）。",
+              "文字新增工具：扫描红字 / 高亮 / 底纹文本（wps_find_colored_text）、批量清除格式（wps_clear_text_formatting）。",
+              "聊天界面改版：类 Claude 时间轴（节点圆点 + 工具 / 思考分段耗时，收起行显示该段总耗时），消息级「复制 / 填回输入框」按钮常显，用户消息靠右、任务清单默认折叠。",
+              "思考强度可选：思考强度改为上弹列表选择（勾选当前项）。",
+              "历史对话独立窗口：历史对话改用独立系统窗口浮在文档上，按 今天 / 7 天内 / 7 天前分组。",
+              "生图独立分区：生图进度移到独立「生图」tab，不再占用聊天区。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "修复流式回复中 delta.content 为数组分片时整段丢字（部分网关 / Azure）。",
+              "修复 Azure OpenAI 鉴权（api-key 头 + 部署名 + api-version）与 Gemini 鉴权（x-goog-api-key）经本地代理透传。",
+              "打印 / 另存 / 导出等有真实副作用的操作，执行前提示确认目标与意图。",
+              "触发限流（rpm / rate limit / 429）时给出友好中文提示，说明是速率限制而非报错。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.6",
+        "date": "2026-07-21",
+        "summary": "全新中英双语界面、AI 排版模板（合同 / 公文 / 论文等）、批注式校对与文档合规检查、AI 操作跟随、长对话自动压缩与跨对话记忆、生图新增 OpenAI 官方 / OpenRouter 与 Boogu 本地生图、导出为新 Word 文件，以及抠图模型重复下载、DeepSeek 等思考模型工具调用报错、mac 粘贴中文乱码、mac 模型下拉、小屏输入区、MCP 与安装稳定性等一批修复。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "全新国际化：支持简体中文 / English 双语界面，默认跟随系统语言，也可在「设置 → 界面语言」手动切换；覆盖 Ribbon 按钮、弹窗标题与原生对话框，切换即时生效（Ribbon 文字重启 WPS 后生效）。",
+              "AI 排版模板：内置「合同 / 公文 / 论文 / 通知公告」等排版模板，可预览样式效果并「查看完整示例」；支持自定义模板（各级标题 / 正文 / 引用的字体、字号、对齐等）；公文 / 论文模板支持中文章节自动编号（一、/（一）/ 1.1）、页边距设置与一级标题另起一页。",
+              "AI 排版支持选择范围：可只排版「选中区域」或「全文」，各自预览确认后替换。",
+              "AI 操作跟随提示：AI 修改文档时，Word 自动滚动到改动位置、Excel 选中改动区域，直观看到 AI 在动哪里（可在设置关闭）。",
+              "批注式校对：新增「批注校对」，把错别字 / 语病 / 标点 / 逻辑问题直接以 Word 批注标注在原文位置，点批注即可跳转。",
+              "文档合规检查：粘贴一份检查清单（招标要求 / 合同审查要点 / 内部规范），AI 按清单逐项核查全文，命中问题以 Word 批注标注并按 高 / 中 / 低 分级。",
+              "生图渠道扩充：新增 OpenAI 官方 与 OpenRouter 两个图像生成渠道；新增 Boogu 本地生图渠道（本地部署、无需 API Key、只生图不抠图），可设默认分辨率档位（768 / 1K / 1080p / 2K / 超清），按图片比例自动折算宽高，也支持连到远端自建的生图服务。",
+              "弱模型工具调用提示：当模型执行了工具却只复述工具名、没用返回结果作答时，聊天里提示可换用更强的模型。",
+              "Ribbon 快捷指令收纳成「操作盒子」：点 Ribbon 按钮发送的固定提示词在聊天里折叠成一行，点开可看完整提示词；历史记录同样折叠显示。",
+              "长对话更省 token：超长对话自动把早期轮次压缩成滚动摘要，最近几轮保持原文，避免 token 无限增长或撞上下文上限。",
+              "跨对话记忆：新对话会自动接上同一文档此前对话确定的偏好与结论。",
+              "本地快捷指令：「保存」「跳到第 N 页」「插入 N×M 表格」「撤销 / 重做」等确定性指令本地直接执行，零延迟、不消耗 token。",
+              "导出为新 Word 文件：排版结果可一键另存为新的 Word 文件，不改动当前文档。",
+              "大纲生成 PPT 更稳：生成前 AI 先审校大纲（补全章节 / 层级）再生成。",
+              "聊天回复固定简体中文（跟随界面语言）：修复使用国外模型时回复英文的问题，思考过程同样约束。",
+              "MCP 新增 reveal_location 工具：外部 AI 可主动定位并高亮文档区域，引导用户视线。",
+              "任务进度面板支持折叠 / 展开；模型下拉默认显示已测试供应商的全部模型，无需手动刷新。",
+              "后台长任务（校对 / 合规检查等）统一状态管理，进度 / 日志可查、可中断恢复；对话持久化改为空闲错峰，长对话连续发送更流畅。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "修复 mac 端聊天顶部模型下拉无法点击切换模型。",
+              "修复小屏 / 矮窗口下底部聊天输入区被挤压、停止按钮点不到；「AI 工作中」提示改为紧凑单行。",
+              "修复覆盖安装时旧后台服务未被结束导致安装中断，以及后台守护误判 WPS 未运行而停掉服务、致 Ribbon 入口消失。",
+              "修复启用「MCP 服务」保存后重新打开设置显示未修改；修复外部 agent 的 MCP 调用日志在设置窗口不显示。",
+              "修复历史聊天记录回放时 Ribbon 快捷指令的「操作盒子」丢失（旧记录也尽量按提示词还原）。",
+              "修复开发环境在多平台 runtime 共存时误选到其它平台的 Node。",
+              "修复本地抠图每次都重新下载模型：下载中途被 WebView 请求超时 / 取消打断时，已下载的模型不再作废，后台继续下完并缓存，下次抠图直接秒开。",
+              "修复 DeepSeek 等自带思考模式的模型在需要读取表格等场景下报「Thinking mode does not support this tool_choice」而无法对话——自动降级重试。",
+              "修复 mac 端聊天输入框粘贴中文变乱码。",
+              "修复本地慢速生图（如 Boogu）因 WebView 60 秒超时被误判失败、反复重试——改为后台异步出图 + 轮询进度。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.4",
+        "date": "2026-07-14",
+        "summary": "本地缓存全面迁移到 SQLite、可选择性启用 Office 组件、服务状态面板、AI 直接操作 WPS，素材库标签化与多来源采集、PDF 对照翻译 / 总结 / 问答双通道、PPT 分步生成配图、云端技能、Token 消耗面板、AI 排版支持表格等一大批更新。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "桌面端全部本地缓存迁移到 SQLite（经内置 Node 代理）：不再受浏览器 localStorage 容量 / 配额限制；对话 / 历史 / Token 统计 / 素材 / 技能等多宿主写入走服务端原子合并，重启不丢、更一致。",
+              "新增「服务状态」设置页：查看本机后台服务占用的端口与内存。",
+              "可选择性启用 Word / Excel / PPT / PDF：在设置里勾选，只在选中的组件里加载文小舟（改动重启 WPS 生效）。",
+              "AI 操作模式默认改为「直接操作 WPS」（无需每步确认）；操作模式选项重命名，同时保留「预览确认」模式。",
+              "设置 / 素材相关面板迁移到 Ant Design Vue，交互更统一。",
+              "素材项目名改为 AI 每对话自动总结：获取素材时自动打项目标签，去掉手填「当前项目」输入框。",
+              "AI 排版支持软换行文档与 markdown 表格：整篇靠 Shift+Enter 分行的文档也能逐行排版；把 markdown 表格美化成 Word 原生表格再替换。",
+              "素材库全面升级：素材带「项目标签 + 内容标签」，生成图自动打标；做文档 / PPT 时 AI 可按标签检索复用已有素材，不再重复生成。",
+              "素材库支持导入本地图片，并用视觉模型自动生成内容标签；新增文本搜索与项目筛选。",
+              "新增联网抓网页（web_fetch）与联网找图（web_image_search），把网页数据 / 网络图片作为素材入库。",
+              "PPT 分步生成：整套幻灯片先带占位骨架秒级插入供预览，配图在后台异步生成、每页图齐后自动替换回该页。",
+              "云端技能：可从云端（OSS）目录加载技能，按需勾选启用，无需手动导入。",
+              "新增「Token 消耗」面板：按模型统计输入 / 输出 / 调用次数，持久化并含本会话小计。",
+              "Ribbon 操作（扩写 / 翻译 / 润色等）自动结合文档标题、大纲与上下文，输出不再偏离文档主题。",
+              "AI 写回 Word 直接按 Word 原生格式渲染（标题 / 列表 / 表格等），不再先生成 markdown 再转换。",
+              "素材库 AI 抠图 / 画笔编辑：一键去背景，或用画笔涂抹框定主体后局部重绘 / 抠出主体（Codex 桥接渠道）。",
+              "本地离线抠图：内置神经网络抠图（onnxruntime + isnet），发丝级软边、任意模型可用、纯离线；模型首次按需从云端下载。",
+              "AI 生图可指定本次图片比例；生成图可在素材库圈选裁剪成新素材；素材预览支持滚轮缩放；素材库改为瀑布流布局。",
+              "文档脑图改用 markmap 离线渲染，右侧可针对脑图追问，并可把脑图转成图片存入素材库。",
+              "聊天顶部模型下拉可按供应商折叠 / 展开。",
+              "PDF 对照翻译 / 全文总结 / PDF 问答重构为双通道：数字版 PDF 抽取带页码文字（任意模型可读、更省、页码准），扫描件自动回退整文件多模态。",
+              "PDF 对照翻译改为独立窗口：可选原文 / 目标语言、全文 / 指定页翻译，尽量保留原排版，结果为流式原文 / 译文对照表。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "模型不支持图片 / 附件时给出可行动的中文提示，不再直接抛「Unexpected item type in content」这类天书。",
+              "「预览确认」模式下修复确认框弹出后点不动（文档锁禁用了任务窗格交互），并给确认框瘦身。",
+              "转发超时改为「空闲判定」：只要 SSE 在返回就不算超时，推理模型思考较久 / chunk 间隔大不再被误杀（超时可用环境变量调整）。",
+              "修复 Windows 手动粘贴莫名多一个换行；手动粘贴卡住时显示「正在粘贴」蒙版。",
+              "修复安装后后台服务因缺文件起不来、WPS 无插件入口；三端卸载补齐残留清理（含 SQLite 库、后台 launcher 进程、Linux linger 等）。",
+              "修复代理用不支持 node:sqlite 的旧版 Node 启动导致崩溃。",
+              "修复 AI 排版「整篇被当成一段、只排出一个标题」与「替换后只剩标题」。",
+              "修复 mac Word 功能区图标 / 按钮显示异常；完善 PDF 插件回调与本地调试兼容；修复模型测试过滤、供应商展开状态、本地代理转发等一批问题。",
+              "修复输入框编辑快捷键（Ctrl+C/V 等）被左侧文档截获；翻译替换保留换行不再与下一段粘连；一键生成 PPT 的 AddPicture 空返回加固。",
+              "修复流式对话在严格校验请求体的网关下，因 stream_options 字段被拒返回 400 导致对话中断的问题（自动去掉该字段重试）。",
+              "对 runtime / providers / 工具 / 安装器做了一轮问题排查与修复。",
+              "站点下载页修正 SSR manifest 状态、平台识别与下载链接。",
+              "修复 PDF 对照翻译 / 问答弹窗被提示词里的页码示例误当作必填项而卡住；修复部分 WPS 版本读不到 PDF 附件导致 AI「看不到 PDF」。",
+              "修复一轮调用多个工具后，待执行工具区把上方对话流挤到只剩几条。",
+              "抠图 / 重绘增加可见进度与取消，修复抠图结果不是透明 PNG 的问题。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.2",
+        "date": "2026-06-28",
+        "summary": "改动记录恢复体验大改、AI 排版预览真打字机，以及 Linux 银河麒麟安装失败修复。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "改动记录恢复后保留 entry 不再删，UI 加「已恢复」徽章 + 隐藏「恢复本轮」按钮；重启 TaskPane 也能看到完整历史。",
+              "改动记录标题智能派生：短 prompt 直接用，长 / 空 prompt 时按工具友好名拼（如「替换选区内容 · 应用段落样式」），原始 prompt 挂悬浮 tooltip。",
+              "多步免关文档恢复：老 turn 也走 Application.Undo 路径（按距离自动调 N 次），不再每次都关闭重开文档。",
+              "AI 排版预览真打字机：已生成 block 静态停留，活跃 block 末尾闪烁光标 + 逐字增量，不再整面板抖动重渲。",
+              "下载页 URL / 文件名 / 文件大小全部从 OSS manifest.json 动态读取，发布滞后自动跟随。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "Linux 银河麒麟 V10 安装失败修复：post-install-linux.sh 在 set -u 模式下 heredoc 把给 systemd /bin/sh -c 用的位置参数 $2 当成自己的未定义变量提前展开导致脚本退出，systemd 单元写不完整、服务无法启动。",
+              "撤回中间 turn 时级联标记所有更新的 turn 为已恢复，避免 backup 与文档状态错位、按钮可点但实际撤错 group。",
+              "Linux 包构建增加 Docker 容器路径，Mac 上也能一次产出 tar.gz / deb / rpm 三件套；Apple Silicon 用 --platform 强制 amd64 容器。",
+              "Nuxt 3 dev server 在 Windows 上默认绑 IPv6 导致 localhost 一片白屏 → 强制绑 127.0.0.1。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.1",
+        "date": "2026-06-27",
+        "summary": "围绕 ribbon 操作体验、流式预览、跨平台打包做了一波集中打磨。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "Ribbon 操作（润色 / 缩写 / 重写 / 扩写 / 翻译 / 续写 / 全文总结 / 文档脑图）统一带预览弹窗，支持修改前后高亮对比、流式输出与一键回退。",
+              "AI 排版新增合同 / 招标 / 公文 / 通知 / 论文 / 方案 / 简历预设；未填提示词时按文件类型自动生成。",
+              "生图改为独立进度面板，自动按上下文选 16:9 / 9:16 / 1:1 比例。",
+              "默认模型 ID 改成下拉选择器，从拉取到的模型列表里挑。",
+              "本地代理端口被占用时沿 3890-3909 阶梯自动切换，前端通过 /healthz 探测重新对齐。",
+              "AI 对话中断时自动重试最多 5 次。",
+              "新增手动解除编辑锁定按钮，防止 undo 后文档残留只读状态。",
+              "Ribbon 操作前校验文档是否已保存，按宿主系统给出 Ctrl+S / ⌘+S 提示。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "润色 / 翻译替换保留原文字体与段落样式，正确保留换行；不再把段落后面的标题字号缩小。",
+              "未配置模型时给出明确提示，替换之前误导的 OAuth 登录错误。",
+              "macOS 安装包发布改为 .pkg，右键打开即可绕过 Gatekeeper。",
+              "Linux 包构建支持 Docker 容器路径，tar.gz / deb / rpm 在 Mac 上也能一次产出。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.4.0",
+        "date": "2026-06-23",
+        "summary": "新增 Linux 永久安装能力，并升级 PPT/HTML 模板、可视化编辑、主题预设和应用内更新体验。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "新增 Linux 永久安装器，覆盖 .deb / .rpm / .tar.gz 三种包格式，适配银河麒麟、统信 UOS、openEuler、Anolis、中标麒麟等发行版。",
+              "HTML 模板系统扩展到 17 个布局，覆盖 cover、section、content、stat、feature-grid、timeline、bento、freeform 等演示场景。",
+              "新增 HTML 预览可视化编辑器，支持拖拽、8 向 resize、多选圈选、对齐参考线、6px 吸附与坐标提示。",
+              "PPT 风格预设独立为弹窗，支持可视化主题网格和实时预览。",
+              "新增应用内更新提示与一键更新流程，顶部会在发现新版本时显示醒目的「新版本」状态。",
+              "新增图像生成能力，支持 toapis 与 codex-bridge 两类 provider，并对常见拦截错误给出更明确的提示。"
+            ]
+          },
+          {
+            "type": "chores",
+            "items": [
+              "完善本地 Ollama 模型选型建议，帮助用户根据场景选择更合适的本地模型。",
+              "优化 Linux WPS 加载项路径识别，覆盖 WPS365、UOS 玲珑沙箱等更多安装位置。",
+              "完善永久安装后的卸载与升级流程，减少重装、升级后服务残留或插件路径丢失的问题。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.3.0",
+        "date": "2026-05-13",
+        "tag": "beta",
+        "summary": "扩展 PDF 宿主与多模态能力，重构供应商管理和设置体验，让 TaskPane 更适合长期使用。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "新增 PDF 宿主支持，WPS PDF 可以和文字、表格、演示共用同一套 TaskPane 能力。",
+              "支持把 PDF 作为多模态附件发送给模型，配合图像和文档上下文完成理解、改写与总结。",
+              "新增思考强度设置，按不同 provider 自动映射 reasoning 相关参数。",
+              "重构多供应商管理，支持 Codex、Anthropic、OpenAI 兼容 provider 与自定义接口统一切换。",
+              "设置入口弹窗化，TaskPane 主界面改为更自由的布局。"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "新增浮动 resize 抓手，改善窄面板和不同 WPS 宿主下的拖拽体验。",
+              "补充失败恢复与重试逻辑，去掉调试属性，降低正式环境误暴露调试信息的风险。"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.2.0",
+        "date": "2024-05-20",
+        "tag": "beta",
+        "summary": "支持 Anthropic Claude 3 系列模型，并大幅优化了 Linux 下的服务稳定性。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "新增对 Claude 3 Opus / Sonnet 的支持",
+              "允许在设置中配置自定义模型 API 代理"
+            ]
+          },
+          {
+            "type": "fixes",
+            "items": [
+              "修复 Linux 下通过 Flatpak 运行的 WPS 无法识别插件的问题",
+              "修复对话流在网络波动时断连不重试的 bug"
+            ]
+          }
+        ]
+      },
+      {
+        "version": "1.1.2",
+        "date": "2024-04-15",
+        "tag": "beta",
+        "summary": "完善了 PPT 生成和主题预设的体验，添加 5 套新模板。",
+        "sections": [
+          {
+            "type": "features",
+            "items": [
+              "PPT 新增 Timeline / Bento 布局模板",
+              "支持通过快捷键呼出 TaskPane (Win: Ctrl+Shift+A)"
+            ]
+          },
+          {
+            "type": "chores",
+            "items": [
+              "重构内部 Tool-Use 调度逻辑，提升 30% 响应速度",
+              "更新默认内置的 Node.js 到 v22 LTS"
+            ]
+          }
+        ]
+      }
+    ],
+    "sections": {
+      "features": "🌟 新特性",
+      "fixes": "🐛 问题修复",
+      "chores": "🔧 优化与杂项"
+    }
+  }
+}

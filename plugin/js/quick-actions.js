@@ -207,7 +207,7 @@
     data: "images/icons/table.svg",
     chart: "images/icons/table.svg",
     smart: "images/icons/wand.svg",
-    other: "images/ai.svg"
+    other: "images/ai.png"
   };
 
   const CATEGORY_ORDER_BY_HOST = {

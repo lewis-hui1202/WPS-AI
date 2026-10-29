@@ -1,8 +1,8 @@
 {
   "name": "lingxi-ai",
   "addonType": "wps",
-  "version": "1.4.7",
-  "description": "灵犀AI WPS Writer add-in, using ChatGPT OAuth and OpenAI Responses API.",
+  "version": "1.4.8",
+  "description": "文小舟 WPS Writer add-in, using ChatGPT OAuth and OpenAI Responses API.",
   "main": "index.html",
   "scripts": {
     "proxy": "node --experimental-sqlite tools/proxy-server.js",

@@ -46,8 +46,13 @@ case "$(uname -m)" in
 esac
 
 # 老版安装残留: 旧 postinstall 会在 $INSTALL_PREFIX 里写一个 uninstall.command,
-# 新版改成 /Applications/灵犀AI 卸载.app(走 payload 装),老的可以删了
+# 新版改成 /Applications/文小舟 卸载.app(走 payload 装),老的可以删了
 [ -f "$INSTALL_PREFIX/uninstall.command" ] && rm -f "$INSTALL_PREFIX/uninstall.command"
+
+# 更名升级后，新卸载器已由 pkg payload 放入 Applications；清理旧名称入口。
+if [ -d "/Applications/文小舟 卸载.app" ] && [ -d "/Applications/灵犀AI 卸载.app" ]; then
+  rm -rf "/Applications/灵犀AI 卸载.app"
+fi
 
 # 用目标用户身份跑真正的安装逻辑
 # 修 M3：用 `env` 显式设环境变量，而不是把 HOME=/USER= 直接跟在 sudo 后面（那会被 sudo 当作

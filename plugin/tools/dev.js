@@ -527,7 +527,7 @@ const hostServer = useOwnStaticServer
         process.execPath,
         [path.resolve(cwd, "tools/dev-static-server.js")],
         cwd,
-        { WPSJS_PORT: String(devPorts.staticPort), STATIC_PORT: String(devPorts.staticPort) }
+        { WPSJS_PORT: String(devPorts.staticPort), STATIC_PORT: String(devPorts.staticPort), LINGXI_PROXY_PORT: String(devPorts.proxyPort) }
       )
 	  : spawnLabeled(
 	      "wpsjs",

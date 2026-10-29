@@ -74,7 +74,7 @@ function labelCallbackName(id) {
 }
 
 function pngIconPath(iconPath) {
-  return String(iconPath || "images/ai.svg").replace(/\.svg(?:$|\?)/, (match) => match.replace(".svg", ".png"));
+  return String(iconPath || "images/ai.png").replace(/\.svg(?:$|\?)/, (match) => match.replace(".svg", ".png"));
 }
 
 function iconPathForButton(host, qa, id, action, category) {
@@ -103,7 +103,7 @@ function buttonAttrs({ id, label, size, iconPath, visible = false }) {
 
 function buildRibbonCallbackScript(host, qa) {
   const BUILTIN_LABELS = {
-    openWpsAiPane: "打开灵犀AI",
+    openWpsAiPane: "打开文小舟",
     lingxiStyleBtn: "PPT 风格",
     lingxiUnifyBtn: "统一风格",
     lingxiDeAiBtn: "去 AI 味"
@@ -112,7 +112,7 @@ function buildRibbonCallbackScript(host, qa) {
   if (host === "wpp") ids.push("lingxiStyleBtn", "lingxiUnifyBtn", "lingxiDeAiBtn");
   const labelById = Object.assign({}, BUILTIN_LABELS);
   // 分组 / Tab 的 getLabel 绑定（fnName → 中文原文）
-  const extraLabels = [[labelCallbackName("tab.wpsAiTab"), "灵犀AI"], [labelCallbackName("group.lingxiCore"), "灵犀AI"]];
+  const extraLabels = [[labelCallbackName("tab.wpsAiTab"), "文小舟"], [labelCallbackName("group.lingxiCore"), "文小舟"]];
   qa.getRibbonGroups(host).forEach((group) => {
     extraLabels.push([labelCallbackName(`group.lingxi_${host}_${group.category}`), group.label]);
     group.actions.forEach((act) => {
@@ -156,14 +156,14 @@ function buildRibbon(host, qa, translate) {
   lines.push('<customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="OnAddinLoad">');
   lines.push('  <ribbon startFromScratch="false">');
   lines.push('    <tabs>');
-  // 所有四个宿主都把灵犀AI 插在"开始"前面。WPS Office 主程序里 wps/et/wpp/PDF 阅读模式
+  // 所有四个宿主都把文小舟 插在"开始"前面。WPS Office 主程序里 wps/et/wpp/PDF 阅读模式
   // 的"开始"标签 mso id 统一是 TabHome（早期排查 PDF 不显示其实是 serve-permanent
   // 的 /pdf/* 路由 404 导致的，跟 anchor 无关）。
-  lines.push(`      <tab id="wpsAiTab" label="${escapeXml(tr("灵犀AI"))}" getLabel="${labelCallbackName("tab.wpsAiTab")}" 	insertBeforeMso="TabHome">`);
+  lines.push(`      <tab id="wpsAiTab" label="${escapeXml(tr("文小舟"))}" getLabel="${labelCallbackName("tab.wpsAiTab")}" 	insertBeforeMso="TabHome">`);
 
-  // 主入口 group：「打开灵犀AI」 + PPT 宿主额外的「PPT 风格」「统一风格」按钮
-  lines.push(`        <group id="lingxiCore" label="${escapeXml(tr("灵犀AI"))}" getLabel="${labelCallbackName("group.lingxiCore")}">`);
-  lines.push(`          <button ${buttonAttrs({ id: "openWpsAiPane", label: tr("打开灵犀AI"), size: "large", iconPath: iconPathForButton(host, qa, "openWpsAiPane"), visible: true })}/>`);
+  // 主入口 group：「打开文小舟」 + PPT 宿主额外的「PPT 风格」「统一风格」按钮
+  lines.push(`        <group id="lingxiCore" label="${escapeXml(tr("文小舟"))}" getLabel="${labelCallbackName("group.lingxiCore")}">`);
+  lines.push(`          <button ${buttonAttrs({ id: "openWpsAiPane", label: tr("打开文小舟"), size: "large", iconPath: iconPathForButton(host, qa, "openWpsAiPane"), visible: true })}/>`);
   if (host === "wpp") {
     lines.push(`          <button ${buttonAttrs({ id: "lingxiStyleBtn", label: tr("PPT 风格"), size: "large", iconPath: iconPathForButton(host, qa, "lingxiStyleBtn") })}/>`);
     lines.push(`          <button ${buttonAttrs({ id: "lingxiUnifyBtn", label: tr("统一风格"), size: "large", iconPath: iconPathForButton(host, qa, "lingxiUnifyBtn") })}/>`);

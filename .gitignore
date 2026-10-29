@@ -50,3 +50,10 @@ upload-oss/oss.config.js
 
 # AI 生成的 bug 报告
 docs/bug-report.md
+
+# 外部参考代码（本地学习用，不入库）
+docs/code/
+
+# superpowers 自动生成的设计/计划 md（brainstorm/writing-plans 产物，不入库）
+# 已存在的历史文档保持跟踪；此规则只拦新生成的，防止被自动提交
+docs/superpowers/

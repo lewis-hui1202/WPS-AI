@@ -2,7 +2,7 @@
   "name": "lingxi-ai-upload-oss",
   "version": "1.0.0",
   "private": true,
-  "description": "把灵犀AI 安装包上传到阿里云 OSS，并同步更新下载站的链接",
+  "description": "把文小舟 安装包上传到阿里云 OSS，并同步更新下载站的链接",
   "bin": {
     "lingxi-upload": "./index.js"
   },

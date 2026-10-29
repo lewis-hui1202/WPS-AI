@@ -1,4 +1,4 @@
-# 灵犀AI Linux Installer
+# 文小舟 Linux Installer
 
 打包 Linux 安装包，产出三种格式，覆盖国产 + 主流发行版：
 

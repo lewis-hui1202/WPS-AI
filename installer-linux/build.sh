@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI Linux 打包脚本: 产出
+# 文小舟 Linux 打包脚本: 产出
 #   - dist/lingxi-ai-<version>-linux-<arch>.tar.gz   绿色包,带 install.sh/uninstall.sh,所有发行版通用
 #   - dist/lingxi-ai_<version>_<deb-arch>.deb        Debian/Ubuntu/Deepin/UOS/openKylin/银河麒麟桌面版
 #   - dist/lingxi-ai-<version>-1.<rpm-arch>.rpm      openEuler/Anolis/Fedora/RHEL/银河麒麟服务器/中标麒麟
@@ -136,7 +136,7 @@ DEB_NAME="${PKG_NAME}_${VERSION}_${DEB_ARCH}.deb"
 RPM_NAME="${PKG_NAME}-${VERSION}-1.${RPM_ARCH}.rpm"
 
 echo "============================================="
-echo "  灵犀AI Linux Installer Build"
+echo "  文小舟 Linux Installer Build"
 echo "============================================="
 echo "  Version:     $VERSION"
 echo "  Arch:        $ARCH_NORM (deb=$DEB_ARCH rpm=$RPM_ARCH)"
@@ -303,8 +303,8 @@ Installed-Size: $INSTALLED_SIZE_KB
 Depends: coreutils
 Recommends: systemd, curl
 Homepage: https://github.com/lewis-hui1202/WPS-AI
-Description: Lingxi AI plugin for WPS Office (Linux)
- 灵犀AI WPS 插件,运行本地后台服务给 WPS 加载项调用,
+Description: Wenxiaozhou plugin for WPS Office (Linux)
+ 文小舟 WPS 插件,运行本地后台服务给 WPS 加载项调用,
  安装后自动注册 jsaddons 并通过 systemd --user 单元保活。
  .
  支持 Ubuntu/Debian/Deepin/统信 UOS/银河麒麟桌面版/openKylin。
@@ -425,7 +425,7 @@ if [ "$WANT_RPM" = "1" ]; then
         --iteration "1" \
         --architecture "$RPM_ARCH" \
         --prefix /opt/lingxi-ai \
-        --description "Lingxi AI plugin for WPS Office (灵犀AI WPS 插件)" \
+        --description "Wenxiaozhou plugin for WPS Office (文小舟 WPS 插件)" \
         --license "Proprietary" \
         --url "https://github.com/lewis-hui1202/WPS-AI" \
         --maintainer "lingxi-ai <noreply@lingxi-ai.local>" \

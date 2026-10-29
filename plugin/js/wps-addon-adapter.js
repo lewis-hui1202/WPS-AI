@@ -684,7 +684,7 @@
    * 二次点击 Ribbon 按钮时切换显隐，而不是重复创建。
    */
   // 判断当前活动文档是不是已保存到磁盘且没有脏改动。
-  // 给 ribbon "打开灵犀AI" 按钮做开 pane 前的早判断；不依赖 TaskPane 是否已经加载。
+  // 给 ribbon "打开文小舟" 按钮做开 pane 前的早判断；不依赖 TaskPane 是否已经加载。
   // wps/wpp/et 才查；PDF / 没文档识别一律放行。
   function checkActiveDocSavedForAdapter(app) {
     try {
@@ -706,7 +706,7 @@
       if (!hasPath) {
         return {
           ok: false,
-          hint: "当前文档还没保存到磁盘（临时文档）。请先另存为本地文件（Windows/Linux 用 Ctrl+S，macOS 用 ⌘+S），再打开灵犀AI。"
+          hint: "当前文档还没保存到磁盘（临时文档）。请先另存为本地文件（Windows/Linux 用 Ctrl+S，macOS 用 ⌘+S），再打开文小舟。"
         };
       }
       let savedAttr = null;
@@ -714,7 +714,7 @@
       if (savedAttr === false) {
         return {
           ok: false,
-          hint: "当前文档有未保存的修改。请先保存（Windows/Linux 用 Ctrl+S，macOS 用 ⌘+S），再打开灵犀AI（保存后改动才能纳入备份/回滚记录）。"
+          hint: "当前文档有未保存的修改。请先保存（Windows/Linux 用 Ctrl+S，macOS 用 ⌘+S），再打开文小舟（保存后改动才能纳入备份/回滚记录）。"
         };
       }
       return { ok: true };
@@ -845,7 +845,7 @@
 
   function openTaskPaneAsDialogWithApp(app) {
     const url = `${getUrlPath()}/taskpane.html?pane=dialog`;
-    const title = "灵犀AI";
+    const title = "文小舟";
     const width = Math.round(420 * (global.devicePixelRatio || 1));
     const height = Math.round(720 * (global.devicePixelRatio || 1));
     // CreateTaskPane 路径已经做过保存校验；这里 fallback 到 ShowDialog 也补一道，避免漏判
@@ -901,7 +901,7 @@
       }));
     } catch (e) {}
     const url = `${getUrlPath()}/taskpane.html?mode=paralleltranslate`;
-    const title = "灵犀AI 对照翻译";
+    const title = "文小舟 对照翻译";
     const width = Math.round(900 * (global.devicePixelRatio || 1));
     const height = Math.round(720 * (global.devicePixelRatio || 1));
     if (app && typeof app.ShowDialog === "function") {
@@ -957,10 +957,10 @@
     wrapper.id = "lingxiEntryHint";
     wrapper.style.cssText = "font-family:'Microsoft YaHei UI','Segoe UI',sans-serif;padding:24px;line-height:1.7;color:#1f2329;";
     wrapper.innerHTML = `
-      <h1 style="margin:0 0 12px;color:#1a6dff;">灵犀AI 加载项已启动</h1>
-      <p>请在 WPS 顶部功能区查找 <strong>灵犀AI</strong> 选项卡，然后点击 <strong>打开灵犀AI</strong>。</p>
+      <h1 style="margin:0 0 12px;color:#1a6dff;">文小舟 加载项已启动</h1>
+      <p>请在 WPS 顶部功能区查找 <strong>文小舟</strong> 选项卡，然后点击 <strong>打开文小舟</strong>。</p>
       <p>面板会嵌入到 WPS 右侧的任务窗格区域。再次点击同一按钮可以收起面板。</p>
-      <button id="lingxiOpenBtn" type="button" style="border:0;border-radius:4px;padding:8px 16px;background:#1a6dff;color:#fff;font-weight:500;cursor:pointer;">直接打开灵犀AI</button>
+      <button id="lingxiOpenBtn" type="button" style="border:0;border-radius:4px;padding:8px 16px;background:#1a6dff;color:#fff;font-weight:500;cursor:pointer;">直接打开文小舟</button>
     `;
     document.body.appendChild(wrapper);
     document.getElementById("lingxiOpenBtn")?.addEventListener("click", toggleTaskPane);
@@ -1099,13 +1099,12 @@
     return handleAddinLoad(ribbonUI);
   };
 
-  // 主面板入口是否改用独立 ShowDialog 浮窗（而非 docked taskpane）：只在能确认是 mac/linux 时才改；
-  // Windows 或识别不出时保持 docked（现状）——避免回归 Windows 上工作正常的停靠面板。
+  // Windows 文字部分版本的 JS 停靠窗格会挡住 Ribbon 的鼠标事件，使用浮窗绕过。
   function preferDialogPaneForHost() {
     try {
       const nav = global.navigator || (typeof navigator !== "undefined" ? navigator : null);
       const s = String((nav && nav.userAgent) || "") + " " + String((nav && nav.platform) || "");
-      if (/Windows|Win32|Win64|WOW64/i.test(s)) return false;
+      if (/Windows|Win32|Win64|WOW64/i.test(s)) return detectHostByApp(getApplicationSync()) === "wps";
       return /Mac|Macintosh|Mac OS X|Darwin|Linux|X11|CrOS/i.test(s);
     } catch (e) { return false; }
   }
@@ -1115,9 +1114,7 @@
     traceStatic("adapter.OnAction", id);
     debugLog("OnAction", { id, controlType: typeof control });
     if (id === "openWpsAiPane") {
-      // Mac/Linux 上 docked taskpane 与文档共享 OS 键盘焦点，Cmd+V 会同时进文档造成双份插入，而 jsapi
-      // 没有 ReleaseFocus 可补救（Windows 特有）。这两端改用独立 ShowDialog 浮窗（配合输入框「粘贴」按钮/
-      // 右键粘贴走程序化剪贴板绕开 Cmd+V）。Windows 上 docked taskpane 工作正常、可停靠右侧，保持不变。
+      // 使用浮窗规避对应宿主的停靠窗格焦点或功能区点击问题。
       if (preferDialogPaneForHost()) return openTaskPaneAsDialog();
       return toggleTaskPane();
     }
@@ -1396,7 +1393,7 @@
 
   function getRibbonImage(control) {
     const id = getRibbonControlId(control);
-    const asPng = (path) => String(path || "images/ai.svg").replace(/\.svg(?:$|\?)/, (match) => match.replace(".svg", ".png"));
+    const asPng = (path) => String(path || "images/ai.png").replace(/\.svg(?:$|\?)/, (match) => match.replace(".svg", ".png"));
     let resolved = "";
     if (id === "openWpsAiPane") resolved = "images/ai.png";
     else if (id === "lingxiStyleBtn") resolved = "images/icons/palette.png";

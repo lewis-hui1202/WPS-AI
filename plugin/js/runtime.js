@@ -64,9 +64,9 @@
         cache: "no-store"
       });
       if (!resp.ok) return null;
-      const sig = resp.headers.get("X-Lingxi-Service") || "";
-      if (sig !== SERVICE_SIG) return null;
       const data = await resp.json().catch(() => null);
+      const sig = resp.headers.get("X-Lingxi-Service") || data?.service || "";
+      if (sig !== SERVICE_SIG) return null;
       if (!hasRequiredFeature(data, options)) return null;
       return data && Number.isFinite(Number(data.port)) ? Number(data.port) : port;
     } catch (e) {

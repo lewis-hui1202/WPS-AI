@@ -112,8 +112,8 @@ function main() {
 
     const legacyManifestPath = path.join(dst, "manifest.xml");
     if (fs.existsSync(legacyManifestPath)) {
-      const name = manifest.name || "灵犀AI";
-      const description = manifest.description || "灵犀AI WPS 加载项";
+      const name = manifest.name || "文小舟";
+      const description = manifest.description || "文小舟 WPS 加载项";
       fs.writeFileSync(legacyManifestPath, `<?xml version="1.0" encoding="UTF-8"?>
 <JsPlugin>
   <ApiVersion>1.0.0</ApiVersion>

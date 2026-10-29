@@ -165,7 +165,7 @@
   registry.registerTool({
     name: "save_skill",
     hosts: ["wps", "et", "wpp", "pdf"],
-    description: "把当前这套有用的操作 / 做法沉淀成一个可复用的灵犀AI技能，或优化已有技能。用户说「把刚才的操作总结成技能」「记住这个做法」「优化 XX 技能」时调用。name=技能名（已有同名用户技能则更新它=持续优化）；description=一句话说明什么场景用（写清楚，你以后靠它判断何时 use_skill）；content=详细做法指引（markdown：步骤 / 要点 / 坑 / 关键参数）。保存后自动启用。",
+    description: "把当前这套有用的操作 / 做法沉淀成一个可复用的文小舟技能，或优化已有技能。用户说「把刚才的操作总结成技能」「记住这个做法」「优化 XX 技能」时调用。name=技能名（已有同名用户技能则更新它=持续优化）；description=一句话说明什么场景用（写清楚，你以后靠它判断何时 use_skill）；content=详细做法指引（markdown：步骤 / 要点 / 坑 / 关键参数）。只保存技能内容，不执行任何文档操作、不改动当前文档，保存后自动启用。",
     parameters: {
       type: "object",
       required: ["name", "content"],

@@ -1,4 +1,4 @@
-; 灵犀AI Windows 安装器 - Inno Setup 5.5+
+; 文小舟 Windows 安装器 - Inno Setup 5.5+
 ;
 ; 用 Inno Setup Compiler 编译:
 ;   "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer\lingxi-ai.iss
@@ -7,12 +7,15 @@
 ; 编译前先确保 plugin\runtime\node-win-x64\node.exe 存在
 ;   cd plugin && node tools\bundle-node.js
 ;
-; 产物：dist\lingxi-ai-1.4.7-setup.exe
+; 产物：dist\lingxi-ai-1.4.8-setup.exe
 
-#define MyAppName "灵犀AI"
-#define MyAppNameEn "Lingxi AI"
-#define MyAppVersion "1.4.7"
-#define MyAppPublisher "lingxi-ai"
+#define MyAppName "文小舟"
+#define MyAppNameEn "Wenxiaozhou"
+; build.bat 会从 plugin/package.json 传入版本；直接运行 ISCC 时保留默认值。
+#ifndef MyAppVersion
+#define MyAppVersion "1.4.8"
+#endif
+#define MyAppPublisher "文小舟"
 #define MyAppURL "https://github.com/lewis-hui1202/WPS-AI"
 
 [Setup]
@@ -23,6 +26,7 @@ AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 DefaultDirName={autopf}\LingxiAI
+; 保留旧 AppId 与安装目录，升级时沿用原安装和用户数据。
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=..\dist
@@ -35,7 +39,8 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 UninstallDisplayName={#MyAppName} {#MyAppVersion}
 ChangesAssociations=no
-; SetupIconFile 留空,使用 Inno 默认图标(需 .ico,我们暂时只有 .svg)
+SetupIconFile=wenxiaozhou.ico
+UninstallDisplayIcon={app}\wenxiaozhou.ico
 DisableDirPage=auto
 
 [Languages]
@@ -48,9 +53,14 @@ Source: "..\plugin\*"; DestDir: "{app}\plugin"; Excludes: "node_modules\*,dist\*
 ; 同步附带的 readme/license 便于卸载界面显示来源
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\INSTALL.md"; DestDir: "{app}"; Flags: ignoreversion
+Source: "wenxiaozhou.ico"; DestDir: "{app}"; Flags: ignoreversion
+
+[InstallDelete]
+; 旧版本的开始菜单卸载入口可能因程序组改名而残留。
+Type: files; Name: "{userprograms}\灵犀AI\卸载灵犀AI.lnk"
 
 [Icons]
-Name: "{group}\卸载{#MyAppName}"; Filename: "{uninstallexe}"
+Name: "{group}\卸载{#MyAppName}"; Filename: "{uninstallexe}"; IconFilename: "{app}\wenxiaozhou.ico"
 
 [Run]
 ; 装完后执行 post-install 脚本：建 ~/.lingxi-ai 变体、publish.xml、Run 键、起后台服务
@@ -111,7 +121,7 @@ begin
     LogPath := ExpandConstant('{%USERPROFILE}\.lingxi-ai\install.log');
     if not FileExists(PublishPath) then begin
       MsgBox(
-        'post-install 没能写出 publish.xml,WPS 加载项不会显示「灵犀AI」。' + #13#10 + #13#10 +
+        'post-install 没能写出 publish.xml,WPS 加载项不会显示「文小舟」。' + #13#10 + #13#10 +
         '日志在:' + #13#10 +
         LogPath + #13#10 + #13#10 +
         '常见原因:杀毒/PowerShell 策略拦了脚本,或 WPS 正在运行占住了目录。请把日志发给维护者。',

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const http = require("http");
+const { applyRibbonPosition, readRibbonPosition } = require("./ribbon-position");
 const fs = require("fs");
 const path = require("path");
 
@@ -90,6 +91,16 @@ function serve(req, res, filePath) {
       return;
     }
 
+    if (/^ribbon(?:\.en)?\.xml$/i.test(path.basename(filePath))) {
+      fs.readFile(filePath, "utf8", (error, xml) => {
+        if (error) { setCors(res); res.writeHead(500); res.end(); return; }
+        const body = Buffer.from(applyRibbonPosition(xml, readRibbonPosition()), "utf8");
+        setCors(res);
+        res.writeHead(200, { "Content-Type": "application/xml; charset=utf-8", "Content-Length": body.length, "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0" });
+        res.end(req.method === "HEAD" ? undefined : body);
+      });
+      return;
+    }
     const type = MIME[path.extname(filePath).toLowerCase()] || "application/octet-stream";
     const lastModified = stat.mtime.toUTCString();
     const shouldInjectDevConfig = proxyPort && type.startsWith("text/html") && path.basename(filePath).toLowerCase() === "index.html";

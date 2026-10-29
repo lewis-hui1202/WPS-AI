@@ -466,6 +466,23 @@
   });
 
   registry.registerTool({
+    name: "wps_sample_document_formatting",
+    hosts: ["wps"],
+    description: "只读提取文字文档的段落格式，不读取正文、不修改文档。用于根据现有文档格式创建技能。默认优先选区，否则全篇均匀抽样（最多100段）；返回样本数量与总段数，不能把抽样结果当成全篇。用户明确要求更完整分析时可用 mode=page、offset、nextOffset 分批读取；支持停止。",
+    parameters: { type: "object", properties: {
+      scope: { type: "string", enum: ["auto", "selection", "document"], description: "默认 auto：优先非空选区" },
+      mode: { type: "string", enum: ["sample", "page"], description: "默认 sample；page 按段落分页" },
+      maxParagraphs: { type: "integer", minimum: 1, maximum: 100, description: "每次最多读取段落数，默认40" },
+      offset: { type: "integer", minimum: 0, description: "page 模式的零起始段落偏移" }
+    } },
+    handler: async (args = {}, ctx = {}) => {
+      const fn = writer()?.sampleDocumentFormatting;
+      if (typeof fn !== "function") throw new Error("当前宿主不支持格式采样。");
+      return await fn.call(writer(), { ...args, signal: ctx.signal });
+    }
+  });
+
+  registry.registerTool({
     name: "wps_read_document",
     hosts: ["wps"],
     description: [

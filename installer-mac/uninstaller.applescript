@@ -1,7 +1,7 @@
--- 灵犀AI 卸载工具
+-- 文小舟 卸载工具
 --
 -- 双击运行 → 确认弹窗 → 一次系统密码 → 全清干净
--- 由 build-dmg.sh 用 osacompile 编成 /Applications/灵犀AI 卸载.app
+-- 由 build-dmg.sh 用 osacompile 编成 /Applications/文小舟 卸载.app
 --
 -- 关键设计:
 --   1. AppleScript 在用户上下文跑,先拿到当前用户的 username/uid/home
@@ -18,14 +18,14 @@ on run
 
     -- 第一步: 确认
     try
-        display dialog "确定卸载「灵犀AI」吗?
+        display dialog "确定卸载「文小舟」吗?
 
 会清理:
   • 后台 LaunchAgent (com.lingxi-ai.server)
   • WPS 三宿主的 publish.xml 注册
   • ~/.lingxi-ai/ (用户配置 + 变体)
   • /Library/Application Support/LingxiAI/ (安装目录)
-  • pkgutil 安装记录" buttons {"取消", "卸载"} default button "卸载" cancel button "取消" with icon caution with title "灵犀AI 卸载工具"
+  • pkgutil 安装记录" buttons {"取消", "卸载"} default button "卸载" cancel button "取消" with icon caution with title "文小舟 卸载工具"
     on error number -128
         return
     end try
@@ -38,16 +38,16 @@ on run
                        "SELF_APP=" & quoted form of appPath
         do shell script userInfo & " bash " & quoted form of cleanupScript ¬
             with administrator privileges ¬
-            with prompt "卸载灵犀AI 需要管理员密码来清理 /Library/Application Support/"
+            with prompt "卸载文小舟 需要管理员密码来清理 /Library/Application Support/"
 
         -- 注意:执行到这里时 .app 本体已被 rm,但 applet 进程已 mmap 到内存继续跑,
         -- display dialog 不需要访问 .app 资源,所以仍能正常弹窗
-        display dialog "灵犀AI 已卸载干净 🎉
+        display dialog "文小舟 已卸载干净 🎉
 
   • 重新打开 WPS 后插件不再加载
   • 卸载工具 (.app) 也已经自动删除
   • 已配置的 provider / Token 在 WPS 的 localStorage,
-    若想彻底清除,清空 WPS 缓存即可" buttons {"完成"} default button "完成" with icon note with title "灵犀AI 卸载工具"
+    若想彻底清除,清空 WPS 缓存即可" buttons {"完成"} default button "完成" with icon note with title "文小舟 卸载工具"
     on error errMsg number errNum
         if errNum is -128 then
             -- 用户在密码框点了取消
@@ -60,6 +60,6 @@ on run
 可手动执行下面命令:
   sudo rm -rf ~/.lingxi-ai
   sudo rm -rf '/Library/Application Support/LingxiAI'
-  sudo pkgutil --forget com.lingxi-ai.installer" buttons {"OK"} with icon stop with title "灵犀AI 卸载工具"
+  sudo pkgutil --forget com.lingxi-ai.installer" buttons {"OK"} with icon stop with title "文小舟 卸载工具"
     end try
 end run

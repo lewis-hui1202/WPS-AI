@@ -4,7 +4,8 @@
   const JWT_CLAIM_PATH = "https://api.openai.com/auth";
   // 端口随 WpsAiRuntime 实际探测结果走。每次调用都现拼，不缓存。
   function proxyBase() { return global.WpsAiRuntime?.proxyBase?.() || "http://127.0.0.1:3890"; }
-  function modelsEndpoint() { return `${proxyBase()}/codex/models?client_version=0.0.1`; }
+  // 模型列表按 Codex 客户端版本过滤；0.0.1 会被服务端返回空列表。
+  function modelsEndpoint() { return `${proxyBase()}/codex/models?client_version=0.164.0`; }
   function responsesEndpoint() { return `${proxyBase()}/codex/responses?client_version=0.0.1`; }
 
   function decodeJwtPayload(token) {

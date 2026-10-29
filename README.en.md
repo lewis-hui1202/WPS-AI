@@ -1,4 +1,4 @@
-# Lingxi AI · WPS Office Multi-host AI Assistant
+# Wenxiaozhou · WPS Office Multi-host AI Assistant
 
 **🌐 Language**: [中文](README.md) · **English**
 
@@ -29,14 +29,14 @@ Both bundle Node runtime — **no separate Node install needed**.
 
 ### 2. Install
 
-- **Windows**: Temporarily disable antivirus real-time protection → double-click setup.exe → fully quit WPS → reopen WPS. The "灵犀AI" ribbon tab means success.
+- **Windows**: Temporarily disable antivirus real-time protection → double-click setup.exe → fully quit WPS → reopen WPS. The "文小舟" ribbon tab means success.
 - **macOS**: **Right-click .pkg → Open** (Gatekeeper blocks unsigned packages on double-click) → enter system password → fully quit WPS → reopen.
 
 For details (uninstall / upgrade / troubleshooting / installer build) see [INSTALL.md](INSTALL.md).
 
 ### 3. Configure AI
 
-1. Click "Open LingxiAI" in the ribbon → TaskPane opens on the right → ⚙ Settings (standalone 960×720 dialog)
+1. Click "Open Wenxiaozhou" in the ribbon → TaskPane opens on the right → ⚙ Settings (standalone 960×720 dialog)
 2. Chat panel → **+ Add Provider** → pick one of 12 presets (baseURL pre-filled)
 3. Fill in API Key → ⚡ Test → close dialog → pick a model from the header dropdown and chat
 

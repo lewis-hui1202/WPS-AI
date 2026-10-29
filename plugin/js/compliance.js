@@ -65,7 +65,7 @@
         const pos = P.locateQuote(chunks[ci], issue?.quote);
         if (!pos) continue;
         const note = [
-          `【灵犀AI 合规 · ${SEVERITY_LABELS[sev]}】`,
+          `【文小舟 合规 · ${SEVERITY_LABELS[sev]}】`,
           issue?.rule ? `规则：${String(issue.rule).trim()}` : "",
           issue?.reason ? `问题：${String(issue.reason).trim()}` : "",
           issue?.suggestion ? `建议：${String(issue.suggestion).trim()}` : ""

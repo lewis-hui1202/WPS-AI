@@ -141,7 +141,7 @@
     // 默认 true：让用户能用 WPS 原生工具选中文本框继续微调；之前实验阶段默认 false
     // 等于把功能藏起来了，对正常用户没意义。
     splitLayersOnInsert: true,
-    // 修订模式（仅 WPS 文字）：开后 AI 改动走 Word 原生修订，作者标为「灵犀AI」，可逐条接受/回撤
+    // 修订模式（仅 WPS 文字）：开后 AI 改动走 Word 原生修订，作者标为「文小舟」，可逐条接受/回撤
     reviseMode: false,
     // 用户可配置的系统提示词（追加到每轮 chat 的 system message 里）
     systemPrompt: DEFAULT_SYSTEM_PROMPT,

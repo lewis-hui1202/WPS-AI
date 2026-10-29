@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI Linux 一键卸载工具
+# 文小舟 Linux 一键卸载工具
 #
 # 自动检测安装方式（dpkg .deb / rpm / tar.gz 绿色包），走对应卸载路径。
 #
@@ -65,7 +65,7 @@ if { [ -z "$INSTALL_METHOD" ] || [ "$INSTALL_METHOD" = "none" ]; } && [ -n "$PRE
 fi
 
 echo "============================================="
-echo "  灵犀AI Linux 卸载"
+echo "  文小舟 Linux 卸载"
 echo "============================================="
 echo "  Install 方式:  $INSTALL_METHOD"
 echo "  Prefix:        ${PREFIX:-<没找到,只清用户数据>}"

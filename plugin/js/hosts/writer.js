@@ -176,6 +176,57 @@
     return text;
   }
 
+  // 有界读取格式元数据：默认优先选区，否则均匀抽样；page 模式按游标分批。
+  async function sampleDocumentFormatting({ scope = "auto", mode = "sample", maxParagraphs = 40, offset = 0, signal } = {}) {
+    const startedAt = Date.now();
+    const doc = await ensureDocument();
+    let paragraphs = null;
+    let selected = false;
+    if (scope !== "document") {
+      const sel = await getSelection();
+      const range = typeof sel?.Range === "function" ? await sel.Range() : sel?.Range;
+      if (range && Number(range.End) > Number(range.Start) && range.Paragraphs) {
+        paragraphs = range.Paragraphs;
+        selected = true;
+      } else if (scope === "selection") throw new Error("请先选择要分析的文档范围。");
+    }
+    if (!paragraphs) paragraphs = doc.Content?.Paragraphs;
+    const total = Math.max(0, Number(paragraphs?.Count) || 0);
+    const limit = Math.max(1, Math.min(100, Math.floor(Number(maxParagraphs) || 40)));
+    const from = Math.max(0, Math.min(total, Math.floor(Number(offset) || 0)));
+    const count = Math.min(limit, mode === "page" ? total - from : total);
+    const samples = [];
+    const safe = (fn) => { try { const v = fn(); return v == null ? null : v; } catch (e) { return null; } };
+    for (let n = 0; n < count; n += 1) {
+      if (n % 5 === 0) {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        if (signal?.aborted) throw new DOMException("Aborted", "AbortError");
+      }
+      const index = mode === "page" ? from + n + 1 : (count === 1 ? 1 : 1 + Math.floor(n * (total - 1) / (count - 1)));
+      try {
+        const para = paragraphs.Item(index);
+        const range = para.Range;
+        const style = safe(() => para.Style);
+        const font = safe(() => range.Font);
+        const format = safe(() => range.ParagraphFormat);
+        samples.push({
+          index,
+          style: safe(() => String(style?.NameLocal || style?.Name || style || "")),
+          fontName: safe(() => String(font?.Name || "")), fontSize: safe(() => font?.Size),
+          bold: safe(() => font?.Bold), italic: safe(() => font?.Italic),
+          alignment: safe(() => format?.Alignment), lineSpacing: safe(() => format?.LineSpacing),
+          lineSpacingRule: safe(() => format?.LineSpacingRule),
+          spaceBefore: safe(() => format?.SpaceBefore), spaceAfter: safe(() => format?.SpaceAfter),
+          firstLineIndent: safe(() => format?.FirstLineIndent), leftIndent: safe(() => format?.LeftIndent),
+          rightIndent: safe(() => format?.RightIndent)
+        });
+      } catch (e) { samples.push({ index, error: "无法读取该段格式" }); }
+    }
+    const nextOffset = mode === "page" && from + count < total ? from + count : null;
+    try { global.WpsAiLog?.log?.("format-sampling", { scope: selected ? "selection" : "document", mode, totalParagraphs: total, sampledParagraphs: count, elapsedMs: Date.now() - startedAt }); } catch (e) {}
+    return { scope: selected ? "selection" : "document", mode, totalParagraphs: total, sampledParagraphs: count, nextOffset, samples };
+  }
+
   // 结构化读文档：按顶层段落遍历，每段记 [rangeStart, rangeEnd] + kind。
   // 表格 / 内嵌图 / 目录等特殊段落标 kind=table/image/other，AI 只处理 kind=paragraph 的。
   // 排版应用时表格 / 图片 Range 完全跳过，保住原样。
@@ -2047,7 +2098,7 @@
     return { applied: true };
   }
 
-  // ---- 修订模式：AI 改动前后包一层，让 AI 的编辑记为原生修订 + 作者标为「灵犀AI」----
+  // ---- 修订模式：AI 改动前后包一层，让 AI 的编辑记为原生修订 + 作者标为「文小舟」----
   // 状态存模块内：beginRevise 记下当前 UserName，endRevise 还原，避免把用户自己的手改也记成 AI。
   let _reviseAuthorPrev = null;
   async function beginRevise(author) {
@@ -2057,7 +2108,7 @@
       const app = await getApp();
       if (app) {
         if (_reviseAuthorPrev == null) _reviseAuthorPrev = String(app.UserName == null ? "" : app.UserName);
-        app.UserName = String(author || "灵犀AI");
+        app.UserName = String(author || "文小舟");
       }
     } catch (e) {}
     return { applied: true };
@@ -2093,7 +2144,7 @@
     acceptRejectRevision,        // 逐条接受/拒绝修订
     addWatermark,                // 文字水印
     setView,                     // 视图缩放/定位
-    beginRevise,                 // 修订模式：AI 改动前打开修订 + 作者设为灵犀AI
+    beginRevise,                 // 修订模式：AI 改动前打开修订 + 作者设为文小舟
     endRevise,                   // 修订模式：AI 改动后还原作者
     findColoredText,             // 找红字/高亮/底纹（背景色）文本片段
     clearTextFormatting,         // 批量：统一黑字 + 去高亮 + 去底纹（一次调用整篇）
@@ -2102,6 +2153,7 @@
     readSelectionInfo,           // AI 排版「仅选中区域」用：{ start, end, text } 或 null
     readSelectionSnapshot,
     readDocumentText,
+    sampleDocumentFormatting,
     readDocumentStructure,       // 表格 / 图片保留用：结构化读取，AI 只处理 paragraph
     readDocumentSections,        // 长文改写用：带 headingLevel 的段落遍历，供 splitSections 切节
     headingLevelFromStyle,       // 纯函数：段落 Style 名 -> 标题级别 1-3 / 0

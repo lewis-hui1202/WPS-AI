@@ -1,4 +1,4 @@
-# 灵犀AI Linux 打包用容器
+# 文小舟 Linux 打包用容器
 # 在 Mac / Windows 上跑 Linux 包构建：tar.gz + .deb + .rpm 一次出齐
 #
 # 构建：

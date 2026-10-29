@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 灵犀AI Linux 卸载脚本(用户上下文)
+# 文小舟 Linux 卸载脚本(用户上下文)
 #
 # 调用入口:
 #   - tar.gz 绿色包:  uninstall.sh 直接 bash 调

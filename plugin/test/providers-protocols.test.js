@@ -34,6 +34,50 @@ test("Gemini classifyChunk：区分正文 / 思考(thought:true) / functionCall"
   assert.equal(c.usage.promptTokenCount, 10);
 });
 
+test("Gemini 工具续轮原样回传 functionCall 所在 part 的 thoughtSignature", async () => {
+  const requests = [];
+  const chunks = [
+    [{ candidates: [{ content: { role: "model", parts: [
+      { text: "读取文档", thought: true },
+      { functionCall: { name: "wps_read_document", args: { scope: "all" }, id: "call-1" }, thoughtSignature: "signed-token" },
+      { functionCall: { name: "wps_read_document", args: { scope: "summary" } } }
+    ] } }] }],
+    [{ candidates: [{ content: { role: "model", parts: [{ text: "已完成" }] }, finishReason: "STOP" }] }]
+  ];
+  let provider;
+  const context = {
+    console,
+    setTimeout,
+    fetch: async (_url, options) => {
+      requests.push(JSON.parse(options.body));
+      return { ok: true, iteration: requests.length - 1 };
+    },
+    window: {
+      WpsAiProviderRegistry: { register: (_type, factory) => { provider = factory({ apiKey: "test-key", useProxy: false }); } },
+      WpsAiSse: { readSse: async (response, onChunk) => {
+        for (const chunk of chunks[response.iteration]) await onChunk("message", chunk);
+      } },
+      WpsAiToolRegistry: {
+        execute: async () => ({ ok: true }),
+        serializeResult: (result) => result
+      }
+    }
+  };
+  context.window.window = context.window;
+  vm.createContext(context);
+  vm.runInContext(fs.readFileSync(path.join(__dirname, "..", "js", "providers", "gemini.js"), "utf8"), context);
+  await provider.runWithTools({
+    model: "gemini-3.8-flash", messages: [{ role: "user", content: "总结全文" }],
+    tools: [{ name: "wps_read_document", parameters: { type: "object" } }]
+  });
+  assert.equal(requests.length, 2);
+  const modelTurn = requests[1].contents[1];
+  assert.equal(modelTurn.role, "model");
+  assert.deepEqual(modelTurn.parts, chunks[0][0].candidates[0].content.parts);
+  assert.equal(requests[1].contents[2].parts.length, 2);
+  assert.equal(requests[1].contents[2].parts[0].functionResponse.id, "call-1");
+});
+
 test("Gemini classifyChunk：空/无 candidates 不炸", () => {
   const G = loadGemini();
   const c = G.classifyChunk({});

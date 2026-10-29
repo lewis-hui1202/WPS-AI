@@ -3,7 +3,7 @@ set -e
 cd "$(dirname "$0")"
 
 echo "============================================"
-echo "  灵犀AI WPS 插件 - macOS 永久安装"
+echo "  文小舟 WPS 插件 - macOS 永久安装"
 echo "============================================"
 echo "  会一次性给三个 WPS 应用（文字/表格/演示）注册插件，"
 echo "  并通过 LaunchAgent 把后台服务设为登录自启。"
@@ -108,7 +108,7 @@ echo "  日志: $LOG"
 echo
 echo "  下一步："
 echo "    1. 完全退出 WPS（菜单 → 退出 WPS）"
-echo "    2. 重新打开 WPS 文字 / 表格 / 演示，顶部出现「灵犀AI」"
+echo "    2. 重新打开 WPS 文字 / 表格 / 演示，顶部出现「文小舟」"
 echo "    3. 重启电脑后服务也会自动跑"
 echo
 echo "  卸载：./uninstall-permanent-mac.sh"

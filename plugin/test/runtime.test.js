@@ -115,6 +115,29 @@ test("runtime 只有 reprobe 时才轮询端口并切到可用端口", async () 
   assert.ok(stored.some((entry) => entry.key === "lingxi_runtime_proxy_port_v1" && /3892/.test(entry.value)));
 });
 
+test("runtime 在跨域响应未暴露标识头时，通过响应内容找到代理", async () => {
+  const context = {
+    localStorage: { getItem() { return null; }, setItem() {} },
+    fetch(url) {
+      const port = Number(new URL(url).port);
+      return Promise.resolve({
+        ok: true,
+        headers: { get() { return null; } },
+        async json() {
+          return port === 3891
+            ? { ok: true, service: "lingxi-ai-proxy/v1", port: 3891 }
+            : { ok: true, service: "lingxi-ai-static/v1", port };
+        }
+      });
+    },
+    AbortController, setTimeout, clearTimeout, Date, console
+  };
+  context.window = context;
+  vm.runInNewContext(runtimeJs, context);
+  assert.equal(await context.WpsAiRuntime.reprobe(), 3891);
+  assert.equal(context.WpsAiRuntime.proxyBase(), "http://127.0.0.1:3891");
+});
+
 test("runtime 能按能力要求跳过旧代理端口", async () => {
   const requestedPorts = [];
   const context = {

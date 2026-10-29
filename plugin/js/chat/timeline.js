@@ -440,7 +440,7 @@
 
     const label = doc.createElement("div");
     label.className = "tl-label";
-    label.textContent = "灵犀AI";
+    label.textContent = "文小舟";
     wrap.appendChild(label);
 
     const metaEl = doc.createElement("div");
